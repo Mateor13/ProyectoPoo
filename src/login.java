@@ -6,8 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class login extends JFrame {
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField correo;
+    private JTextField clave;
     private JButton ingresarButton;
     private JLabel Registro;
     private JPanel log;
@@ -46,7 +46,7 @@ public class login extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                Registro.setForeground(Color.BLACK);
+                Registro.setForeground(Color.white);
             }
         });
     }
