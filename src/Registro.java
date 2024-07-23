@@ -11,11 +11,10 @@ public class Registro extends JFrame{
     private JTextField textField3;
     private JTextField textField4;
     private JTextField textField5;
-    private JFormattedTextField nacimiento;
+    private JTextField textField6;
     private JButton registrarButton;
     private JButton cancelarButton;
     private JPanel reg;
-    private JTextField textField6;
 
     public Registro() {
         setTitle("Registro");
