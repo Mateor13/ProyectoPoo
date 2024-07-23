@@ -86,7 +86,7 @@ public class login extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                Registro.setForeground(Color.white);
+                Registro.setForeground(Color.cyan);
             }
         });
     }
