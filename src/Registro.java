@@ -22,7 +22,6 @@ public class Registro extends JFrame{
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
-
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -7,6 +7,7 @@
     </constraints>
     <properties>
       <background color="-13274100"/>
+      <font size="20"/>
     </properties>
     <border type="none"/>
     <children>
@@ -52,7 +53,8 @@
           </grid>
         </constraints>
         <properties>
-          <foreground color="-1"/>
+          <font size="16"/>
+          <foreground color="-16777216"/>
         </properties>
       </component>
       <component id="8de23" class="javax.swing.JTextField" binding="clave">
@@ -62,7 +64,8 @@
           </grid>
         </constraints>
         <properties>
-          <foreground color="-1"/>
+          <font size="16"/>
+          <foreground color="-16777216"/>
           <text value=""/>
         </properties>
       </component>
@@ -91,10 +94,13 @@
       </vspacer>
       <component id="3d802" class="javax.swing.JButton" binding="ingresarButton" default-binding="true">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="40"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-11759351"/>
+          <font size="20"/>
           <foreground color="-1"/>
           <text value="Ingresar"/>
         </properties>
@@ -104,6 +110,7 @@
           <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="20"/>
           <foreground color="-1"/>
           <text value="Registro"/>
         </properties>
