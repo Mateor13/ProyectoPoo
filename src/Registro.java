@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Registro extends JFrame{
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JTextField nombre;
+    private JTextField apellido;
+    private JTextField ci;
+    private JTextField celular;
+    private JTextField email;
+    private JTextField nacimiento;
     private JButton registrarButton;
     private JButton cancelarButton;
     private JPanel reg;

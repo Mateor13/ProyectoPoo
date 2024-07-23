@@ -50,13 +50,15 @@
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="5ab0e" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="5ab0e" class="javax.swing.JTextField" binding="nombre">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="6b40c" class="javax.swing.JLabel">
         <constraints>
@@ -66,7 +68,7 @@
           <text value="Apellidos:"/>
         </properties>
       </component>
-      <component id="9a6dd" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="9a6dd" class="javax.swing.JTextField" binding="apellido">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -82,13 +84,15 @@
           <text value="Número de cédula o pasaporte:"/>
         </properties>
       </component>
-      <component id="68fd6" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="68fd6" class="javax.swing.JTextField" binding="ci">
         <constraints>
           <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="99c4" class="javax.swing.JLabel">
         <constraints>
@@ -98,7 +102,7 @@
           <text value="Número de celular:"/>
         </properties>
       </component>
-      <component id="abe3e" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="abe3e" class="javax.swing.JTextField" binding="celular">
         <constraints>
           <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -114,7 +118,7 @@
           <text value="Correo electrónico:"/>
         </properties>
       </component>
-      <component id="708f" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+      <component id="708f" class="javax.swing.JTextField" binding="email">
         <constraints>
           <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -148,13 +152,15 @@
           <text value="Cancelar"/>
         </properties>
       </component>
-      <component id="cd265" class="javax.swing.JTextField" binding="textField6" default-binding="true">
+      <component id="cd265" class="javax.swing.JTextField" binding="nacimiento">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
     </children>
   </grid>
