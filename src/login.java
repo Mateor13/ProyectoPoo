@@ -59,9 +59,6 @@ public class login extends JFrame {
                             ver.setText("Credenciales incorrectas");
                         }
 
-                    } catch (Exception ex) {
-                        ver.setText("Error al conectar con la base de datos");
-                        ex.printStackTrace();
                     }
                 }
             }
