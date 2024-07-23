@@ -12,7 +12,7 @@ public class MenuInicio extends JFrame {
         setTitle("Menu Inicio");
         setContentPane(menu);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 500));
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
