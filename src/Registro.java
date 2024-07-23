@@ -35,15 +35,7 @@ public class Registro extends JFrame{
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    MaskFormatter dateFormatter = new MaskFormatter("##/##/####");
-                    dateFormatter.setPlaceholderCharacter('_');
-                    nacimiento = new JFormattedTextField(dateFormatter);
-                    nacimiento.setColumns(10);
-                    reg.add(nacimiento, BorderLayout.NORTH);
-                } catch (ParseException e1) {
-                    e1.printStackTrace();
-                }
+
             }
         });
     }
