@@ -1,12 +1,12 @@
 import java.util.Date;
 
 public class Usuarios {
-    String nombre, apellido, email, telefono, clave, fechaNacimiento, cedula;
+    String nombre, apellido, email, telefono, clave, fechaNacimiento, cedula, claveconf;
     //Constructores
     public Usuarios() {
     }
 
-    public Usuarios(String nombre, String apellido, String email, String telefono, String clave, String fechaNacimiento, String cedula) {
+    public Usuarios(String nombre, String apellido, String email, String telefono, String clave, String fechaNacimiento, String cedula, String claveconf) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -14,6 +14,7 @@ public class Usuarios {
         this.clave = clave;
         this.fechaNacimiento = fechaNacimiento;
         this.cedula = cedula;
+        this.claveconf = claveconf;
     }
     //getters y setters
 
@@ -71,5 +72,13 @@ public class Usuarios {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getClaveconf() {
+        return claveconf;
+    }
+
+    public void setClaveconf(String claveconf) {
+        this.claveconf = claveconf;
     }
 }

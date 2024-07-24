@@ -18,6 +18,7 @@ public class Registro extends JFrame {
     private JPanel reg;
     private JTextField clave;
     private JLabel ver;
+    private JTextField claveconf;
 
     public Registro() {
         setTitle("Registro");
@@ -45,10 +46,15 @@ public class Registro extends JFrame {
                 us.setTelefono(celular.getText());
                 us.setFechaNacimiento(nacimiento.getText());
                 us.setClave(clave.getText());
+                us.setClaveconf(claveconf.getText());
 
                 if (us.getNombre().isEmpty() || us.getApellido().isEmpty() || us.getEmail().isEmpty() || us.getCedula().isEmpty() || us.getTelefono().isEmpty() || us.getFechaNacimiento().isEmpty() || us.getClave().isEmpty()) {
                     ver.setText("Hay campos vacíos. Ingrese todos los campos");
-                } else {
+                } else if (!us.getClave().equals(us.getClaveconf())){
+                    ver.setText("Las contraseñas no están iguales");
+                }else if (us.getCedula().length()!=10||us.getTelefono().length()!=10||us.getFechaNacimiento().length()!=10){
+                    ver.setText("La cédula, el correo o la fecha son incorrectas");
+                }else{
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
                         MongoCollection<Document> col = db.getCollection("Usuarios");
@@ -56,12 +62,18 @@ public class Registro extends JFrame {
                         FindIterable<Document> iterable = col.find(doc);
 
                         boolean userExists = false;
-                        for (Document documents : iterable) {
-                            String cedula = documents.getString("cedula");
-                            if (us.getCedula().equals(cedula)) {
-                                ver.setText("Usuario existente");
-                                userExists = true;
-                                break;
+                        if(us.getEmail().equals("Admin1234") || us.getEmail().equals("Duenio1234")){
+                            ver.setText("Usuario existente");
+                            userExists = true;
+                        }else{
+                            for (Document documents : iterable) {
+                                String cedula = documents.getString("cedula");
+                                String email = documents.getString("email");
+                                if (us.getCedula().equals(cedula) || us.getEmail().equals(email)) {
+                                    ver.setText("Usuario existente");
+                                    userExists = true;
+                                    break;
+                                }
                             }
                         }
 

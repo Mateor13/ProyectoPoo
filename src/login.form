@@ -92,7 +92,7 @@
           <background color="-11759351"/>
           <font size="20"/>
           <foreground color="-1"/>
-          <text value="Iniciar"/>
+          <text value="Iniciar sesión"/>
         </properties>
       </component>
       <component id="f6617" class="javax.swing.JLabel" binding="Registro">

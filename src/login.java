@@ -34,7 +34,17 @@ public class login extends JFrame {
 
                 if (usuario.getEmail().isEmpty() || usuario.getClave().isEmpty()) {
                     ver.setText("Hay datos vacíos. Ingrese todos los campos");
-                } else {
+                } else if (usuario.getEmail().equals("Admin1234") && usuario.getClave().equals("Admin1234")) {
+                    ver.setForeground(Color.white);
+                    ver.setText("Verificación exitosa");
+                    new admin();
+                    dispose();
+                }else if (usuario.getEmail().equals("Duenio1234") && usuario.getClave().equals("Duenio1234")){
+                    ver.setForeground(Color.white);
+                    ver.setText("Verificación exitosa");
+                    new duenio();
+                    dispose();
+                }else{
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
                         MongoCollection<Document> col = db.getCollection("Usuarios");
@@ -52,6 +62,7 @@ public class login extends JFrame {
                         }
 
                         if (credencialesCorrectas) {
+                            ver.setForeground(Color.white);
                             ver.setText("Verificación exitosa");
                             new inicio();
                             dispose();
