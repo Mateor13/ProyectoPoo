@@ -133,8 +133,9 @@
           <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="14"/>
           <foreground color="-1"/>
-          <text value="Si no tiene una cuenta"/>
+          <text value="¿Si no tiene una cuenta?"/>
         </properties>
       </component>
     </children>

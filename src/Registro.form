@@ -175,6 +175,7 @@
         </constraints>
         <properties>
           <background color="-13274100"/>
+          <focusable value="false"/>
           <font size="20"/>
           <foreground color="-1"/>
           <text value="Cancelar"/>
@@ -199,6 +200,7 @@
         </constraints>
         <properties>
           <background color="-13274100"/>
+          <focusable value="false"/>
           <font size="20"/>
           <foreground color="-1"/>
           <text value="Registrar"/>
