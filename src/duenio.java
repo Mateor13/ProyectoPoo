@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class duenio extends JFrame{
 
@@ -29,6 +31,20 @@ public class duenio extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 new login();
                 dispose();
+            }
+        });
+        buscarBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                buscarBtn.setBackground(Color.red);
+            }
+        });
+        buscarBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                buscarBtn.setBackground(Color.black);
             }
         });
     }

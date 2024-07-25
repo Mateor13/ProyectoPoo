@@ -7,6 +7,7 @@
     </constraints>
     <properties>
       <background color="-14473879"/>
+      <focusable value="false"/>
     </properties>
     <border type="none"/>
     <children>
@@ -39,6 +40,7 @@
         </constraints>
         <properties>
           <background color="-16777216"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
           <text value="Buscar Horario de Cancha"/>
         </properties>
@@ -61,6 +63,7 @@
         </constraints>
         <properties>
           <background color="-1744027"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
           <text value="Cerrar Sesión"/>
         </properties>
