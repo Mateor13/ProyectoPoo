@@ -120,6 +120,17 @@ public class Usuarios {
         Matcher matcher = patron.matcher(getEmail());
         return matcher.find();
     }
+    public boolean verNume() {
+        Pattern patron = Pattern.compile("^09\\d{8}$");
+        Matcher tel = patron.matcher(getTelefono());
+        return tel.matches();
+    }
+
+    public boolean verCedula() {
+        Pattern patron = Pattern.compile("^\\d{10}$");
+        Matcher ced = patron.matcher(getCedula());
+        return ced.matches();
+    }
     public String generateHash() {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

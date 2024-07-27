@@ -66,7 +66,7 @@ public class Registro extends JFrame {
                     ver.setText("Hay campos vacíos. Ingrese todos los campos");
                 } else if (!us.getClave().equals(us.getClaveconf())) {
                     ver.setText("Las contraseñas no están iguales");
-                } else if (us.getCedula().length() != 10 || us.getTelefono().length() != 10) {
+                } else if (!us.verNume() || !us.verCedula()) {
                     ver.setText("La cédula o el teléfono son incorrectos");
                 } else if (fechaSeleccionada.after(new Date())) {
                     ver.setText("La fecha de nacimiento no puede ser mayor a la actual");
