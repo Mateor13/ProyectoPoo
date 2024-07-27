@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class Registro extends JFrame {
     private JTextField nombre;
@@ -24,6 +25,7 @@ public class Registro extends JFrame {
     private JDateChooser fecha;
 
     public Registro() {
+        setIconImage(new ImageIcon(getClass().getResource("./icono/Sample_User_Icon.jpg")).getImage());
         setTitle("Registro");
         setContentPane(reg);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +33,7 @@ public class Registro extends JFrame {
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
-
+        setResizable(false);
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

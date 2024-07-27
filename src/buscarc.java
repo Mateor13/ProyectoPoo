@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class buscarc extends JFrame {
     private JTable table1;
@@ -13,6 +14,7 @@ public class buscarc extends JFrame {
     private JButton regBtn;
 
     public buscarc() {
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("./icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Buscar Cliente");
         setContentPane(Bus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
