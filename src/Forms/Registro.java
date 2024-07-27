@@ -36,13 +36,6 @@ public class Registro extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
-        cancelarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new login();
-                dispose();
-            }
-        });
 
         registrarButton.addActionListener(new ActionListener() {
             @Override
@@ -115,6 +108,14 @@ public class Registro extends JFrame {
                         ex.printStackTrace();
                     }
                 }
+            }
+        });
+
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new login();
+                dispose();
             }
         });
     }

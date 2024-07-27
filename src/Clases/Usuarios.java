@@ -1,5 +1,10 @@
 package Clases;
 
+import com.mongodb.client.*;
+import org.bson.Document;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.security.MessageDigest;
@@ -154,4 +159,5 @@ public class Usuarios {
         }
         return hexString.toString();
     }
+
 }
