@@ -1,3 +1,5 @@
+package Forms;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ public class MenuInicio extends JFrame {
     private JPanel menu;
 
     public MenuInicio() {
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("./icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Menu Inicio");
         setContentPane(menu);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

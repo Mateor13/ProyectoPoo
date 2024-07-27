@@ -1,3 +1,5 @@
+package Forms;
+
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -14,7 +16,7 @@ public class buscarc extends JFrame {
     private JButton regBtn;
 
     public buscarc() {
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("./icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Buscar Cliente");
         setContentPane(Bus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +35,7 @@ public class buscarc extends JFrame {
                 regBtn.setVisible(true);
                 try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                     MongoDatabase db = moncli.getDatabase("futbolito");
-                    MongoCollection<Document> col = db.getCollection("Usuarios");
+                    MongoCollection<Document> col = db.getCollection("Clases.Usuarios");
                     Document doc = new Document();
                     FindIterable<Document> iterable = col.find(doc);
                 }

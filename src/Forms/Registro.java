@@ -1,3 +1,6 @@
+package Forms;
+
+import Clases.Usuarios;
 import com.mongodb.client.*;
 import com.toedter.calendar.JDateChooser;
 import org.bson.Document;
@@ -8,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 public class Registro extends JFrame {
     private JTextField nombre;
@@ -25,7 +27,7 @@ public class Registro extends JFrame {
     private JDateChooser fecha;
 
     public Registro() {
-        setIconImage(new ImageIcon(getClass().getResource("./icono/Sample_User_Icon.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/Sample_User_Icon.jpg")).getImage());
         setTitle("Registro");
         setContentPane(reg);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +79,7 @@ public class Registro extends JFrame {
                 } else {
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Usuarios");
+                        MongoCollection<Document> col = db.getCollection("Clases.Usuarios");
                         Document doc = new Document("cedula", us.getCedula());
                         FindIterable<Document> iterable = col.find(doc);
 

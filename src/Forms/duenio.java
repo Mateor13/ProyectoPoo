@@ -1,3 +1,5 @@
+package Forms;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +15,7 @@ public class duenio extends JFrame{
     private JButton cerrarBtn;
 
     public duenio() {
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("./icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Menú encargados");
         setContentPane(due);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

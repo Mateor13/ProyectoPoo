@@ -1,3 +1,5 @@
+package Forms;
+import Clases.Usuarios;
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -7,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Objects;
 
 public class login extends JFrame {
     private JTextField correo;
@@ -18,7 +19,7 @@ public class login extends JFrame {
     private JLabel ver;
 
     public login() {
-        setIconImage(new ImageIcon(getClass().getResource("./icono/Sample_User_Icon.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/Sample_User_Icon.jpg")).getImage());
         setTitle("Inicio de sesión");
         setContentPane(log);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +52,7 @@ public class login extends JFrame {
                     System.out.println(usuario.getEncripclave());
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Usuarios");
+                        MongoCollection<Document> col = db.getCollection("Clases.Usuarios");
                         Document doc = new Document("correo", usuario.getEmail());
                         FindIterable<Document> iterable = col.find(doc);
 

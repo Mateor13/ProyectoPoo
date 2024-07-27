@@ -1,5 +1,7 @@
+package Clases;
+
 import java.util.List;
-import java.util.Arrays;
+
 public class cancha {
     String numero, nombre, ubicacion;
     List<String> lines = List.of();
