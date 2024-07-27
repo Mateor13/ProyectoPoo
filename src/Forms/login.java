@@ -27,6 +27,7 @@ public class login extends JFrame {
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

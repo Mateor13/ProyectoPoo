@@ -23,6 +23,7 @@ public class duenio extends JFrame{
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         buscarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -37,9 +37,9 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-14473879"/>
+          <background color="-1319217"/>
           <focusable value="false"/>
-          <foreground color="-1"/>
+          <foreground color="-16777216"/>
           <text value="Canchas"/>
         </properties>
       </component>
@@ -63,9 +63,9 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-14473879"/>
+          <background color="-1319217"/>
           <focusable value="false"/>
-          <foreground color="-1"/>
+          <foreground color="-16777216"/>
           <text value="Jugadores"/>
         </properties>
       </component>
@@ -76,9 +76,9 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-14473879"/>
+          <background color="-1319217"/>
           <focusable value="false"/>
-          <foreground color="-1"/>
+          <foreground color="-16777216"/>
           <text value="Reservas"/>
         </properties>
       </component>
