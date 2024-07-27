@@ -90,6 +90,7 @@
         </constraints>
         <properties>
           <background color="-11759351"/>
+          <focusable value="false"/>
           <font size="20"/>
           <foreground color="-1"/>
           <text value="Iniciar sesión"/>

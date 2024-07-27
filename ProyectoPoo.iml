@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mongodb.driver.sync" level="project" />
+    <orderEntry type="library" name="toedter.jcalendar" level="project" />
   </component>
 </module>

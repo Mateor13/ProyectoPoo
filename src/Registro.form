@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="reg" layout-manager="GridLayoutManager" row-count="25" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="774"/>
+      <xy x="20" y="20" width="500" height="780"/>
     </constraints>
     <properties>
       <background color="-11759351"/>
@@ -73,7 +73,7 @@
         <properties>
           <font size="16"/>
           <foreground color="-1"/>
-          <text value="Apellidos:"/>
+          <text value="Apellido:"/>
         </properties>
       </component>
       <component id="9a6dd" class="javax.swing.JTextField" binding="apellido">
@@ -154,7 +154,7 @@
         <properties>
           <font size="16"/>
           <foreground color="-1"/>
-          <text value="Fecha de nacimiento (DD/MM/YYYY):"/>
+          <text value="Fecha de nacimiento:"/>
         </properties>
       </component>
       <vspacer id="96716">
@@ -179,17 +179,6 @@
           <font size="20"/>
           <foreground color="-1"/>
           <text value="Cancelar"/>
-        </properties>
-      </component>
-      <component id="cd265" class="javax.swing.JTextField" binding="nacimiento">
-        <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font size="16"/>
-          <text value=""/>
         </properties>
       </component>
       <component id="80393" class="javax.swing.JButton" binding="registrarButton" default-binding="true">
@@ -257,6 +246,13 @@
         <properties>
           <font size="16"/>
         </properties>
+      </component>
+      <component id="a417c" class="com.toedter.calendar.JDateChooser" binding="fecha" custom-create="true">
+        <constraints>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
       </component>
     </children>
   </grid>
