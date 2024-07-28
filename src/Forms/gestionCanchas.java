@@ -16,7 +16,7 @@ public class gestionCanchas extends JFrame{
     private JLabel ver;
 
     public gestionCanchas (){
-        setIconImage(new ImageIcon(getClass().getResource("../icono/cancha.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/cancha.png")).getImage());
         setTitle("Gestión de Canchas");
         setContentPane(gescan);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +38,8 @@ public class gestionCanchas extends JFrame{
         editarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            new editarCanchas();
+            dispose();
             }
         });
         elimBtn.addActionListener(new ActionListener() {

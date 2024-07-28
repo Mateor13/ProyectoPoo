@@ -3,7 +3,6 @@ import Clases.cancha;
 import com.mongodb.client.*;
 import org.bson.Document;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -11,17 +11,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class cancha {
-    String numero, nombre, ubicacion, numeroJugadores;
+    String numero, nombre, ubicacion, numeroJugadores, btn, input;
     List<String> lines = List.of();
+
     public cancha() {
     }
 
-    public cancha(String numero, String nombre, String ubicacion, String numeroJugadores, List<String> lines) {
+    public cancha(String numero, String nombre, String ubicacion, String numeroJugadores, String btn, String input, List<String> lines) {
         this.numero = numero;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.numeroJugadores = numeroJugadores;
         this.lines = lines;
+        this.btn = btn;
+        this.input = input;
     }
 
     public String getNumero() {
@@ -64,19 +67,35 @@ public class cancha {
         this.numeroJugadores = numeroJugadores;
     }
 
-    public boolean vernumCan(){
+    public String getBtn() {
+        return btn;
+    }
+
+    public void setBtn(String btn) {
+        this.btn = btn;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public boolean vernumCan() {
         Pattern patron = Pattern.compile("^\\d{5}$");
         Matcher matcher = patron.matcher(getNumero());
         return matcher.matches();
     }
 
-    public void mostrarCanchas(JTable tabla){
+    public void mostrarCanchas(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         model.addColumn("Numero Cancha");
         model.addColumn("Nombre");
         model.addColumn("Dirección");
         model.addColumn("Número jugadores");
-        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             MongoDatabase db = mongo.getDatabase("futbolito");
             MongoCollection<Document> col = db.getCollection("Canchas");
             FindIterable<Document> iter = col.find();
@@ -90,13 +109,13 @@ public class cancha {
         }
     }
 
-    public void eliminarRegistro(JTable tabla, JLabel label){
+    public void eliminarRegistro(JTable tabla, JLabel label) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        if (tabla.getSelectedRow()==-1){
+        if (tabla.getSelectedRow() == -1) {
             label.setText("No se ha seleccionado el registro");
-        }else{
+        } else {
             label.setText("");
-            try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+            try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                 MongoDatabase db = mongo.getDatabase("futbolito");
                 MongoCollection<Document> col = db.getCollection("Canchas");
 
@@ -109,6 +128,18 @@ public class cancha {
             } catch (Exception e) {
                 label.setText("No se ha eliminado el registro: " + e.getMessage());
             }
+        }
+    }
+    public void actualizarRegistro(JLabel label){
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Canchas");
+            Document filter = new Document("id", getNumero());
+            Document upd = new Document("$set", new Document(getBtn(), getInput()));
+            col.updateOne(filter, upd);
+            label.setText("Registro actualizado");
+        } catch (Exception e) {
+            label.setText("No se ha actualizado el registro: " + e.getMessage());
         }
     }
 }
