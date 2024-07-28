@@ -27,7 +27,7 @@ public class Registro extends JFrame {
     private JDateChooser fecha;
 
     public Registro() {
-        setIconImage(new ImageIcon(getClass().getResource("../icono/Sample_User_Icon.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
         setTitle("Registro");
         setContentPane(reg);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +72,7 @@ public class Registro extends JFrame {
                 } else {
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Clases.Usuarios");
+                        MongoCollection<Document> col = db.getCollection("Usuarios");
                         Document doc = new Document("cedula", us.getCedula());
                         FindIterable<Document> iterable = col.find(doc);
 

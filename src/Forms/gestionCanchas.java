@@ -13,9 +13,10 @@ public class gestionCanchas extends JFrame{
     private JButton editarBtn;
     private JButton elimBtn;
     private JButton regresarBtn;
+    private JLabel ver;
 
     public gestionCanchas (){
-        setIconImage(new ImageIcon(getClass().getResource("../icono/Admin.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/cancha.jpg")).getImage());
         setTitle("Gestión de Canchas");
         setContentPane(gescan);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +44,7 @@ public class gestionCanchas extends JFrame{
         elimBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            can.eliminarRegistro(tablaCanchas, ver);
             }
         });
         regresarBtn.addActionListener(new ActionListener() {

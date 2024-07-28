@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Forms.adingrCan">
-  <grid id="27dc6" binding="regCan" layout-manager="GridLayoutManager" row-count="13" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="regCan" layout-manager="GridLayoutManager" row-count="14" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="408"/>
+      <xy x="20" y="20" width="500" height="433"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-11883306"/>
+      <toolTipText value="-- Numero total de Jugadores --"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="d3763" class="javax.swing.JLabel">
@@ -18,13 +21,15 @@
           <text value="Ingresar Cancha"/>
         </properties>
       </component>
-      <component id="be363" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="be363" class="javax.swing.JTextField" binding="num">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <focusable value="true"/>
+        </properties>
       </component>
       <component id="c5888" class="javax.swing.JLabel">
         <constraints>
@@ -34,13 +39,15 @@
           <text value="Número de Cancha:"/>
         </properties>
       </component>
-      <component id="d51ec" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="d51ec" class="javax.swing.JTextField" binding="nom">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <focusable value="true"/>
+        </properties>
       </component>
       <component id="ff9cf" class="javax.swing.JLabel">
         <constraints>
@@ -50,13 +57,15 @@
           <text value="Nombre:"/>
         </properties>
       </component>
-      <component id="75d48" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="75d48" class="javax.swing.JTextField" binding="dir">
         <constraints>
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <focusable value="true"/>
+        </properties>
       </component>
       <component id="b98a" class="javax.swing.JLabel">
         <constraints>
@@ -66,27 +75,38 @@
           <text value="Dirección:"/>
         </properties>
       </component>
-      <component id="e185a" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="f649d" class="javax.swing.JComboBox" binding="numJug">
         <constraints>
           <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model>
+            <item value="-- Total de jugadores --"/>
+            <item value="10"/>
+            <item value="14"/>
+            <item value="22"/>
+          </model>
+          <popupVisible value="false"/>
+          <toolTipText value="-- Número total de jugadores --"/>
+        </properties>
       </component>
       <component id="c4286" class="javax.swing.JLabel">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <labelFor value="f649d"/>
           <text value="Número de jugadores:"/>
         </properties>
       </component>
       <component id="2ce11" class="javax.swing.JButton" binding="registrarBtn">
         <constraints>
-          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <focusable value="false"/>
           <text value="Registrar"/>
         </properties>
       </component>
@@ -107,15 +127,25 @@
       </vspacer>
       <vspacer id="747b6">
         <constraints>
-          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="bb6a4" class="javax.swing.JButton" binding="regresarBtn">
         <constraints>
-          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <focusable value="false"/>
           <text value="Regresar"/>
+        </properties>
+      </component>
+      <component id="2e7ed" class="javax.swing.JLabel" binding="ver">
+        <constraints>
+          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-1769469"/>
+          <text value=""/>
         </properties>
       </component>
     </children>

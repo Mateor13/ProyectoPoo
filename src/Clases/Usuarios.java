@@ -125,8 +125,9 @@ public class Usuarios {
     public boolean verCorreo() {
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher matcher = patron.matcher(getEmail());
-        return matcher.find();
+        return matcher.matches();
     }
+
     public boolean verNume() {
         Pattern patron = Pattern.compile("^09\\d{8}$");
         Matcher tel = patron.matcher(getTelefono());

@@ -19,7 +19,7 @@ public class login extends JFrame {
     private JLabel ver;
 
     public login() {
-        setIconImage(new ImageIcon(getClass().getResource("../icono/Sample_User_Icon.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
         setTitle("Inicio de sesión");
         setContentPane(log);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +53,7 @@ public class login extends JFrame {
                     System.out.println(usuario.getEncripclave());
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Clases.Usuarios");
+                        MongoCollection<Document> col = db.getCollection("Usuarios");
                         Document doc = new Document("correo", usuario.getEmail());
                         FindIterable<Document> iterable = col.find(doc);
 
