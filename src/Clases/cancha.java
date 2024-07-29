@@ -130,16 +130,19 @@ public class cancha {
             }
         }
     }
-    public void actualizarRegistro(JLabel label){
+    public void actualizarRegistro(JLabel label) {
+        label.setText("");
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             MongoDatabase db = mongo.getDatabase("futbolito");
             MongoCollection<Document> col = db.getCollection("Canchas");
             Document filter = new Document("id", getNumero());
-            Document upd = new Document("$set", new Document(getBtn(), getInput()));
-            col.updateOne(filter, upd);
+            Document update = new Document("$set", new Document(getBtn(), getInput()));
+            col.updateOne(filter, update);
             label.setText("Registro actualizado");
+            label.setVisible(true);
         } catch (Exception e) {
             label.setText("No se ha actualizado el registro: " + e.getMessage());
+            label.setVisible(true);
         }
     }
 }
