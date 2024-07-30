@@ -17,7 +17,7 @@ public class gestionJugadores extends JFrame {
 
     Usuarios us = new Usuarios();
     public gestionJugadores() {
-        setIconImage(new ImageIcon(getClass().getResource("../icono/Sample_User_Icon.jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
         setTitle("Gestión de Jugadores");
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

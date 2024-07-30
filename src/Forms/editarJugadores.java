@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -123,9 +122,10 @@ public class editarJugadores extends JFrame {
         verBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(new String(cont.getPassword()));
                 if (cont.getPassword().length==0) {
                     ver2.setText("Ingrese la contraseña");
-                } else if (usu.verClave(cont.getText(), ver2)) {
+                } else if (usu.verClave(new String(cont.getPassword()), ver2)) {
                     mostrarCampos("clave");
                     con.setText("");
                     confcla.setText("");
@@ -267,12 +267,11 @@ public class editarJugadores extends JFrame {
                 return false;
             }
 
-            if (!(confcla.getText().equals(con.getText()))) {
+            if (!(new String(confcla.getPassword()).equals(new String(con.getPassword())))) {
                 ver2.setText("Las contraseñas no coinciden");
                 return false;
             }
         }
-
         return true;
     }
 
@@ -302,7 +301,7 @@ public class editarJugadores extends JFrame {
                 usu.setInp(usu.getDiaNacimiento() + "/" + usu.getMesNacimiento() + "/" + usu.getAnoNacimiento());
                 break;
             case "clave":
-                usu.setInp(usu.generateHash2(con.getText()));
+                usu.setInp(usu.generateHash2(new String(con.getPassword())));
                 break;
         }
     }
