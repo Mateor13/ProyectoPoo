@@ -50,7 +50,6 @@ public class login extends JFrame {
                     new duenio();
                     dispose();
                 } else {
-                    System.out.println(usuario.getEncripclave());
                     try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                         MongoDatabase db = moncli.getDatabase("futbolito");
                         MongoCollection<Document> col = db.getCollection("Usuarios");
