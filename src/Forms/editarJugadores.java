@@ -8,9 +8,10 @@ import org.bson.Document;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 public class editarJugadores extends JFrame {
     private JPanel Pane;
@@ -37,6 +38,7 @@ public class editarJugadores extends JFrame {
     private JDateChooser fec;
     private JLabel ver2;
     private JLabel cit;
+    private JPasswordField confcla;
     Usuarios usu = new Usuarios();
 
     public editarJugadores() {
@@ -44,7 +46,7 @@ public class editarJugadores extends JFrame {
         setTitle("Editar Jugadores");
         setContentPane(Pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -121,11 +123,12 @@ public class editarJugadores extends JFrame {
         verBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (cont.getText().isEmpty()) {
+                if (cont.getPassword().length==0) {
                     ver2.setText("Ingrese la contraseña");
                 } else if (usu.verClave(cont.getText(), ver2)) {
                     mostrarCampos("clave");
                     con.setText("");
+                    confcla.setText("");
                 }
             }
         });
@@ -198,6 +201,7 @@ public class editarJugadores extends JFrame {
             case "clave":
                 txt.setText("Ingrese la nueva contraseña");
                 con.setVisible(true);
+                confcla.setVisible(true);
                 break;
         }
         txt.setVisible(true);
@@ -254,8 +258,17 @@ public class editarJugadores extends JFrame {
         }
 
         if (con.isVisible()) {
-            if (con.getText().isEmpty()) {
+            if (con.getPassword().length == 0) {
                 ver2.setText("Ingrese la contraseña");
+                return false;
+            }
+            if (confcla.getPassword().length == 0) {
+                ver2.setText("Confirme la contraseña");
+                return false;
+            }
+
+            if (!(confcla.getText().equals(con.getText()))) {
+                ver2.setText("Las contraseñas no coinciden");
                 return false;
             }
         }
@@ -326,6 +339,7 @@ public class editarJugadores extends JFrame {
         con.setVisible(false);
         verBtn.setVisible(false);
         actuBtn.setVisible(false);
+        confcla.setVisible(false);
         txt.setVisible(false);
         ver2.setVisible(false);
     }
