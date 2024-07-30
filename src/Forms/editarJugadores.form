@@ -175,7 +175,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="824df" class="javax.swing.JTextField" binding="cont">
+      <component id="1e1b" class="javax.swing.JPasswordField" binding="cont">
         <constraints>
           <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="252" height="34"/>
@@ -183,7 +183,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="8b928" class="javax.swing.JTextField" binding="con">
+      <component id="3018f" class="javax.swing.JPasswordField" binding="con">
         <constraints>
           <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="252" height="34"/>

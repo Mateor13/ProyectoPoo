@@ -26,8 +26,8 @@ public class editarJugadores extends JFrame {
     private JTextField ape;
     private JTextField cor;
     private JTextField tel;
-    private JTextField cont;
-    private JTextField con;
+    private JPasswordField cont;
+    private JPasswordField con;
     private JButton verBtn;
     private JButton regrBtn;
     private JButton elegBtn;
@@ -121,8 +121,11 @@ public class editarJugadores extends JFrame {
         verBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usu.verClave(cont.getText(), ver2)) {
+                if (cont.getText().isEmpty()) {
+                    ver2.setText("Ingrese la contraseña");
+                } else if (usu.verClave(cont.getText(), ver2)) {
                     mostrarCampos("clave");
+                    con.setText("");
                 }
             }
         });
@@ -130,8 +133,17 @@ public class editarJugadores extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validarCampos()) {
-                    capturarInput(usu);
-                    usu.actualizarRegistro(ver2);
+                    if (usu.getBtn().equals("clave")){
+                        capturarInput(usu);
+                        usu.actualizarRegistro(ver2);
+                        mostrarCampos("confclave");
+                        JOptionPane.showMessageDialog(null, "Contraseña actualizada");
+                        cont.setText("");
+                        ver2.setText("");
+                    }else {
+                        capturarInput(usu);
+                        usu.actualizarRegistro(ver2);
+                    }
                 }
             }
         });
@@ -241,6 +253,13 @@ public class editarJugadores extends JFrame {
             }
         }
 
+        if (con.isVisible()) {
+            if (con.getText().isEmpty()) {
+                ver2.setText("Ingrese la contraseña");
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -271,7 +290,6 @@ public class editarJugadores extends JFrame {
                 break;
             case "clave":
                 usu.setInp(usu.generateHash2(con.getText()));
-
                 break;
         }
     }
