@@ -91,7 +91,7 @@ public class cancha {
 
     public void mostrarCanchas(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        model.addColumn("Numero Cancha");
+        model.addColumn("Número Cancha");
         model.addColumn("Nombre");
         model.addColumn("Dirección");
         model.addColumn("Número jugadores");

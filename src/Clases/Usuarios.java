@@ -1,6 +1,7 @@
 package Clases;
 
 import com.mongodb.client.*;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 
 import javax.swing.*;
@@ -12,13 +13,13 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class Usuarios {
-    String nombre, apellido, email, telefono, clave, cedula, claveconf, encripclave;
+    String nombre, apellido, email, telefono, clave, cedula, claveconf, encripclave, inp, btn;
     int diaNacimiento, mesNacimiento, anoNacimiento;
        //Constructores
     public Usuarios() {
     }
 
-    public Usuarios(String nombre, String apellido, String email, String telefono, String clave, String cedula, String claveconf, String encripclave, int diaNacimiento, int mesNacimiento, int anoNacimiento) {
+    public Usuarios(String nombre, String apellido, String email, String telefono, String clave, String cedula, String claveconf, String encripclave, String inp, String btn, int diaNacimiento, int mesNacimiento, int anoNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -27,6 +28,8 @@ public class Usuarios {
         this.cedula = cedula;
         this.claveconf = claveconf;
         this.encripclave = encripclave;
+        this.inp = inp;
+        this.btn = btn;
         this.diaNacimiento = diaNacimiento;
         this.mesNacimiento = mesNacimiento;
         this.anoNacimiento = anoNacimiento;
@@ -122,15 +125,43 @@ public class Usuarios {
         this.encripclave = encripclave;
     }
 
+    public String getInp() {
+        return inp;
+    }
+
+    public void setInp(String inp) {
+        this.inp = inp;
+    }
+
+    public String getBtn() {
+        return btn;
+    }
+
+    public void setBtn(String btn) {
+        this.btn = btn;
+    }
+
     public boolean verCorreo() {
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher matcher = patron.matcher(getEmail());
         return matcher.matches();
     }
 
+    public boolean verCorreo2(String text) {
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matcher = patron.matcher(text);
+        return matcher.matches();
+    }
+
     public boolean verNume() {
         Pattern patron = Pattern.compile("^09\\d{8}$");
         Matcher tel = patron.matcher(getTelefono());
+        return tel.matches();
+    }
+
+    public boolean verNume2(String text) {
+        Pattern patron = Pattern.compile("^09\\d{8}$");
+        Matcher tel = patron.matcher(text);
         return tel.matches();
     }
 
@@ -149,6 +180,16 @@ public class Usuarios {
         }
     }
 
+    public String generateHash2(String clave1) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedhash = digest.digest(clave1.getBytes());
+            return bytesToHex(encodedhash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder();
         for (byte b : hash) {
@@ -161,4 +202,81 @@ public class Usuarios {
         return hexString.toString();
     }
 
+    public void mostrarUsuarios(JTable tabla) {
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        model.addColumn("Cédula");
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("Correo");
+        model.addColumn("Teléfono");
+        model.addColumn("Fecha de Nacimiento");
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Usuarios");
+            FindIterable<Document> iter = col.find();
+            for (Document doc : iter) {
+                String ci = doc.getString("cedula");
+                String nom = doc.getString("nombre");
+                String ape = doc.getString("apellido");
+                String cor = doc.getString("correo");
+                String tel = doc.getString("celular");
+                String fecha = doc.getString("fechaNacimiento");
+                model.addRow(new Object[]{ci, nom, ape, cor, tel, fecha});
+            }
+        }
+    }
+    public void eliminarRegistro(JTable tabla, JLabel label) {
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        if (tabla.getSelectedRow() == -1) {
+            label.setText("No se ha seleccionado el registro");
+        } else {
+            label.setText("");
+            try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+                MongoDatabase db = mongo.getDatabase("futbolito");
+                MongoCollection<Document> col = db.getCollection("Usuarios");
+
+                String codigo = model.getValueAt(tabla.getSelectedRow(), 0).toString();
+                Document filter = new Document("cedula", codigo);
+                col.deleteOne(filter);
+
+                model.removeRow(tabla.getSelectedRow());
+                label.setText("Registro eliminado");
+            } catch (Exception e) {
+                label.setText("No se ha eliminado el registro: " + e.getMessage());
+            }
+        }
+    }
+    public void actualizarRegistro(JLabel label) {
+        label.setText("");
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Usuarios");
+            Document filter = new Document("cedula", getCedula());
+            Document update = new Document("$set", new Document(getBtn(), getInp()));
+            col.updateOne(filter, update);
+            label.setText("Registro actualizado");
+            label.setVisible(true);
+        } catch (Exception e) {
+            label.setText("No se ha actualizado el registro: " + e.getMessage());
+            label.setVisible(true);
+        }
+    }
+    public boolean verClave(String txt, JLabel lbl){
+        String encodcl = generateHash2(txt);
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Usuarios");
+            Document doc = new Document("cedula", getCedula());
+            FindIterable<Document> iterable = col.find(doc);
+            for (Document document : iterable){
+                String clave = document.getString("clave");
+                if (encodcl.equals(clave)){
+                    lbl.setText("");
+                    return true;
+                }
+            }
+            lbl.setText("Clave incorrecta");
+            return false;
+        }
+    }
 }
