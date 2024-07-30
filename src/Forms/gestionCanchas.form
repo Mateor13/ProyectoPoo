@@ -66,7 +66,7 @@
           <background color="-1744027"/>
           <focusable value="false"/>
           <foreground color="-1"/>
-          <text value="Regresar"/>
+          <text value="Regresar al Menú de Administrador"/>
         </properties>
       </component>
       <component id="3662b" class="javax.swing.JButton" binding="ingresarBtn">
@@ -77,7 +77,7 @@
           <background color="-9064132"/>
           <focusable value="false"/>
           <foreground color="-1"/>
-          <text value="Ingresar"/>
+          <text value="Ingresar una Nueva Cancha"/>
         </properties>
       </component>
       <scrollpane id="c8065">

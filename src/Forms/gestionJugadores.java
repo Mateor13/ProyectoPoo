@@ -21,7 +21,7 @@ public class gestionJugadores extends JFrame {
         setTitle("Gestión de Jugadores");
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setPreferredSize(new java.awt.Dimension(800, 400));
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
