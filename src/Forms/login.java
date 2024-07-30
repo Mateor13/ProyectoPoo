@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class login extends JFrame {
     private JTextField correo;
@@ -19,7 +20,7 @@ public class login extends JFrame {
     private JLabel ver;
 
     public login() {
-        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
         setTitle("Inicio de sesión");
         setContentPane(log);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
