@@ -137,9 +137,9 @@ public class editarJugadores extends JFrame {
                         capturarInput(usu);
                         usu.actualizarRegistro(ver2);
                         mostrarCampos("confclave");
-                        JOptionPane.showMessageDialog(null, "Contraseña actualizada");
                         cont.setText("");
                         ver2.setText("");
+                        JOptionPane.showMessageDialog(null, "Contraseña actualizada");
                     }else {
                         capturarInput(usu);
                         usu.actualizarRegistro(ver2);
