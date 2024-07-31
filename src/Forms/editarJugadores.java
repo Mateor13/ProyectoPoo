@@ -122,7 +122,6 @@ public class editarJugadores extends JFrame {
         verBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(new String(cont.getPassword()));
                 if (cont.getPassword().length==0) {
                     ver2.setText("Ingrese la contraseña");
                 } else if (usu.verClave(new String(cont.getPassword()), ver2)) {

@@ -18,6 +18,7 @@
         <properties>
           <font name="Bernard MT Condensed" size="26"/>
           <foreground color="-1"/>
+          <labelFor value="c8065"/>
           <text value="Gestión de Canchas"/>
         </properties>
       </component>
@@ -84,12 +85,21 @@
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-10723229"/>
+          <foreground color="-1"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="24130" class="javax.swing.JTable" binding="tablaCanchas">
             <constraints/>
-            <properties/>
+            <properties>
+              <background color="-14474461"/>
+              <foreground color="-1"/>
+              <gridColor color="-1"/>
+              <selectionBackground color="-16569490"/>
+              <selectionForeground color="-1"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

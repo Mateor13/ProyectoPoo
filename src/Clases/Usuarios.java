@@ -204,6 +204,7 @@ public class Usuarios {
 
     public void mostrarUsuarios(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        tabla.setRowHeight(25);
         model.addColumn("Cédula");
         model.addColumn("Nombre");
         model.addColumn("Apellido");

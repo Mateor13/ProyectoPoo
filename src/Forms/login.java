@@ -1,5 +1,6 @@
 package Forms;
 import Clases.Usuarios;
+import Clases.Logeo;
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -61,7 +62,11 @@ public class login extends JFrame {
                         for (Document document : iterable) {
                             String correo1 = document.getString("correo");
                             String clave1 = document.getString("clave");
+                            String nombre = document.getString("nombre");
+                            String cedula = document.getString("cedula");
                             if (usuario.getEmail().equals(correo1) && usuario.getEncripclave().equals(clave1)) {
+                                Logeo.setNombre(nombre);
+                                Logeo.setCedula(cedula);
                                 credencialesCorrectas = true;
                                 break;
                             }

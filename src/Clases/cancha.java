@@ -91,6 +91,9 @@ public class cancha {
 
     public void mostrarCanchas(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        tabla.setRowHeight(25);
+        tabla.setBackground(new java.awt.Color(35,35,35));
+        tabla.setForeground(new java.awt.Color(255,255,255));
         model.addColumn("Número Cancha");
         model.addColumn("Nombre");
         model.addColumn("Dirección");
@@ -119,9 +122,9 @@ public class cancha {
                 MongoDatabase db = mongo.getDatabase("futbolito");
                 MongoCollection<Document> col = db.getCollection("Canchas");
 
-                String codigo = (String) model.getValueAt(tabla.getSelectedRow(), 0).toString();
+                String codigo = model.getValueAt(tabla.getSelectedRow(), 0).toString();
                 Document filter = new Document("id", codigo);
-                DeleteResult res = col.deleteOne(filter);
+                col.deleteOne(filter);
 
                 model.removeRow(tabla.getSelectedRow());
                 label.setText("Registro eliminado");
