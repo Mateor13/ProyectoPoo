@@ -40,7 +40,8 @@ public class fecha extends JFrame {
                         int mes = cal.get(Calendar.MONTH) + 1;
                         int ano = cal.get(Calendar.YEAR);
                         Logeo.setFecha(dia + "/" + mes + "/" + ano);
-                        System.out.println(Logeo.getFecha());
+                        new reservar();
+                        dispose();
                     }
                 } else {
                     ver.setText("Seleccione una fecha");
