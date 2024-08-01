@@ -133,7 +133,7 @@ public class cancha {
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             MongoDatabase db = mongo.getDatabase("futbolito");
             MongoCollection<Document> col = db.getCollection("Canchas");
-            Document filter = new Document("id", getNumero());
+            Document filter = new Document("id", Logeo.getCodigo());
             Document update = new Document("$set", new Document(getBtn(), getInput()));
             col.updateOne(filter, update);
             label.setText("Registro actualizado");

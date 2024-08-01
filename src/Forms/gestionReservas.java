@@ -29,18 +29,20 @@ public class gestionReservas extends JFrame {
         Reservas res = new Reservas();
         recargarTabla(res);
 
-        resBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new adingrRes();
-                dispose();
-            }
-        });
+
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new editarReservas();
-                dispose();
+                if (!res.seleccionarReserva(tabl)) {
+                    ver.setText("Seleccione una Reserva");
+                } else {
+                    ver.setText("");
+                    DefaultTableModel model = (DefaultTableModel) tabl.getModel();
+                    int codigo = Integer.parseInt((String) model.getValueAt(tabl.getSelectedRow(), 0));
+                    Logeo.setNumReserva(codigo);
+                    new editarReservas();
+                    dispose();
+                }
             }
         });
         elimBtn.addActionListener(new ActionListener() {

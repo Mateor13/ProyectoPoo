@@ -240,7 +240,7 @@ public class Usuarios {
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             MongoDatabase db = mongo.getDatabase("futbolito");
             MongoCollection<Document> col = db.getCollection("Usuarios");
-            Document filter = new Document("cedula", getCedula());
+            Document filter = new Document("cedula", Logeo.getCedula());
             Document update = new Document("$set", new Document(getBtn(), getInp()));
             col.updateOne(filter, update);
             label.setText("Registro actualizado");
@@ -262,7 +262,7 @@ public class Usuarios {
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
             MongoDatabase db = mongo.getDatabase("futbolito");
             MongoCollection<Document> col = db.getCollection("Usuarios");
-            Document doc = new Document("cedula", getCedula());
+            Document doc = new Document("cedula", Logeo.getCedula());
             FindIterable<Document> iterable = col.find(doc);
             for (Document document : iterable){
                 String clave = document.getString("clave");

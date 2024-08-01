@@ -1,9 +1,7 @@
 package Forms;
 
-import Clases.Usuarios;
-import com.mongodb.client.*;
+import Clases.*;
 import com.toedter.calendar.JDateChooser;
-import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +12,6 @@ import java.util.Date;
 
 public class editarJugadores extends JFrame {
     private JPanel Pane;
-    private JTextField ci;
-    private JButton buscarBtn;
     private JButton nomBtn;
     private JButton apeBtn;
     private JButton corBtn;
@@ -32,12 +28,11 @@ public class editarJugadores extends JFrame {
     private JButton regrBtn;
     private JButton elegBtn;
     private JButton actuBtn;
-    private JLabel ver1;
     private JLabel txt;
     private JDateChooser fec;
     private JLabel ver2;
-    private JLabel cit;
     private JPasswordField confcla;
+    private JLabel ver;
     Usuarios usu = new Usuarios();
 
     public editarJugadores() {
@@ -45,43 +40,13 @@ public class editarJugadores extends JFrame {
         setTitle("Editar Jugadores");
         setContentPane(Pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 500));
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
         inicializar();
-
-        buscarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (ci.getText().isEmpty()) {
-                    ver1.setText("Ingrese la cédula del Usuario");
-                } else {
-                    usu.setCedula(ci.getText());
-                    try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
-                        MongoDatabase db = mongo.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Usuarios");
-                        Document doc = new Document("cedula", usu.getCedula());
-                        FindIterable<Document> iterable = col.find(doc);
-                        boolean Existe = false;
-                        for (Document document : iterable) {
-                            String ci1 = document.getString("cedula");
-                            if (usu.getCedula().equals(ci1)) {
-                                ver1.setText("Usuario encontrado");
-                                Existe = true;
-                                break;
-                            }
-                        }
-                        if (Existe) {
-                            mostrarOpciones();
-                        } else {
-                            ver1.setText("Usuario no encontrado");
-                        }
-                    }
-                }
-            }
-        });
+        ver.setText("Editando a: " + Logeo.getNombre());
 
         nomBtn.addActionListener(new ActionListener() {
             @Override
@@ -153,7 +118,7 @@ public class editarJugadores extends JFrame {
         elegBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mostrarOpciones();
+                inicializar();
                 ver2.setText("");
             }
         });
@@ -278,6 +243,7 @@ public class editarJugadores extends JFrame {
         switch (usu.getBtn()) {
             case "nombre":
                 usu.setInp(nom.getText());
+                ver.setText("Editando a: " + usu.getInp());
                 break;
             case "apellido":
                 usu.setInp(ape.getText());
@@ -305,22 +271,6 @@ public class editarJugadores extends JFrame {
         }
     }
 
-    private void mostrarOpciones() {
-        resetCampos();
-        ci.setVisible(false);
-        cit.setVisible(false);
-        ver1.setVisible(false);
-        buscarBtn.setVisible(false);
-        nomBtn.setVisible(true);
-        apeBtn.setVisible(true);
-        corBtn.setVisible(true);
-        telBtn.setVisible(true);
-        fecBtn.setVisible(true);
-        conBtn.setVisible(true);
-        actuBtn.setVisible(false);
-        elegBtn.setVisible(false);
-    }
-
     private void resetCampos() {
         nomBtn.setVisible(false);
         apeBtn.setVisible(false);
@@ -344,10 +294,13 @@ public class editarJugadores extends JFrame {
 
     private void inicializar() {
         resetCampos();
-        ci.setVisible(true);
-        cit.setVisible(true);
-        buscarBtn.setVisible(true);
-        elegBtn.setVisible(false);
+        nomBtn.setVisible(true);
+        apeBtn.setVisible(true);
+        corBtn.setVisible(true);
+        fecBtn.setVisible(true);
+        telBtn.setVisible(true);
+        conBtn.setVisible(true);
+        ver2.setVisible(true);
     }
 
     private void createUIComponents() {

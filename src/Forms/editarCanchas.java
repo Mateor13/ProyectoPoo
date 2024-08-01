@@ -1,5 +1,6 @@
 package Forms;
 
+import Clases.Logeo;
 import com.mongodb.client.*;
 import org.bson.Document;
 import Clases.cancha;
@@ -24,15 +25,14 @@ public class editarCanchas extends JFrame {
     private JLabel nomTxt;
     private JLabel dirTxt;
     private JLabel nTxt;
-    private JLabel numTxt;
-    private JLabel ver1;
+    private JLabel ver;
     private JLabel ver2;
     private JButton elegirBtn;
 
     private void inicializar() {
-        nomBtn.setVisible(false);
-        dirBtn.setVisible(false);
-        numJBtn.setVisible(false);
+        nomBtn.setVisible(true);
+        dirBtn.setVisible(true);
+        numJBtn.setVisible(true);
         nomTxt.setVisible(false);
         nomb.setVisible(false);
         dirTxt.setVisible(false);
@@ -55,43 +55,7 @@ public class editarCanchas extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         inicializar();
-
-        buscarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (num.getText().isEmpty()) {
-                    ver1.setText("Ingrese el número de la cancha");
-                } else {
-                    canc.setNumero(num.getText());
-                    try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
-                        MongoDatabase db = mongo.getDatabase("futbolito");
-                        MongoCollection<Document> col = db.getCollection("Canchas");
-                        Document doc = new Document("id", canc.getNumero());
-                        FindIterable<Document> iterable = col.find(doc);
-                        boolean Existe = false;
-                        for (Document document : iterable) {
-                            String num1 = document.getString("id");
-                            if (canc.getNumero().equals(num1)) {
-                                ver1.setText("Cancha encontrada");
-                                Existe = true;
-                                break;
-                            }
-                        }
-                        if (Existe) {
-                            num.setVisible(false);
-                            numTxt.setVisible(false);
-                            ver1.setVisible(false);
-                            buscarBtn.setVisible(false);
-                            nomBtn.setVisible(true);
-                            dirBtn.setVisible(true);
-                            numJBtn.setVisible(true);
-                        } else {
-                            ver1.setText("Cancha no encontrada");
-                        }
-                    }
-                }
-            }
-        });
+        ver.setText("Editando Cancha: " + Logeo.getNombreCancha());
 
         nomBtn.addActionListener(new ActionListener() {
             @Override
@@ -180,6 +144,7 @@ public class editarCanchas extends JFrame {
         switch (canc.getBtn()) {
             case "nombre":
                 canc.setInput(nomb.getText());
+                ver.setText("editando la cancha: " + canc.getInput());
                 break;
             case "direccion":
                 canc.setInput(dire.getText());

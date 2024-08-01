@@ -40,8 +40,18 @@ public class gestionCanchas extends JFrame{
         editarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            new editarCanchas();
-            dispose();
+                if (!can.seleccionarRegitro(tablaCanchas)) {
+                    ver.setText("Seleccione una Cancha");
+                } else {
+                    ver.setText("");
+                    DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
+                    String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
+                    String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
+                    Logeo.setCodigo(codigo);
+                    Logeo.setNombreCancha(nombre1);
+                    new editarCanchas();
+                    dispose();
+                }
             }
         });
         elimBtn.addActionListener(new ActionListener() {

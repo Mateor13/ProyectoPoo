@@ -38,8 +38,18 @@ public class gestionJugadores extends JFrame {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new editarJugadores();
-                dispose();
+                DefaultTableModel model = (DefaultTableModel) tabl.getModel();
+                if(!us.seleccionarRegitro(tabl)){
+                    ver.setText("Seleccione un jugador");
+                }else{
+                    ver.setText("");
+                    String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
+                    String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
+                    Logeo.setCedula(cedula1);
+                    Logeo.setNombre(nombre1);
+                    new editarJugadores();
+                    dispose();
+                }
             }
         });
         elimBtn.addActionListener(new ActionListener() {
