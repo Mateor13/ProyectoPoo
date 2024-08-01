@@ -89,6 +89,13 @@ public class cancha {
         return matcher.matches();
     }
 
+    public boolean seleccionarRegitro(JTable table1) {
+        if (table1.getSelectedRow() == -1) {
+            return false;
+        }
+        return true;
+    }
+
     public void mostrarCanchas(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         tabla.setRowHeight(25);
@@ -112,25 +119,12 @@ public class cancha {
         }
     }
 
-    public void eliminarRegistro(JTable tabla, JLabel label) {
-        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        if (tabla.getSelectedRow() == -1) {
-            label.setText("No se ha seleccionado el registro");
-        } else {
-            label.setText("");
+    public void eliminarRegistro(String codigo) {
             try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                 MongoDatabase db = mongo.getDatabase("futbolito");
                 MongoCollection<Document> col = db.getCollection("Canchas");
-
-                String codigo = model.getValueAt(tabla.getSelectedRow(), 0).toString();
                 Document filter = new Document("id", codigo);
                 col.deleteOne(filter);
-
-                model.removeRow(tabla.getSelectedRow());
-                label.setText("Registro eliminado");
-            } catch (Exception e) {
-                label.setText("No se ha eliminado el registro: " + e.getMessage());
-            }
         }
     }
     public void actualizarRegistro(JLabel label) {

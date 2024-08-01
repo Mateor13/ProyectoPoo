@@ -1,5 +1,6 @@
 package Clases;
 
+import Forms.fecha;
 import com.mongodb.client.*;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
@@ -226,25 +227,12 @@ public class Usuarios {
             }
         }
     }
-    public void eliminarRegistro(JTable tabla, JLabel label) {
-        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        if (tabla.getSelectedRow() == -1) {
-            label.setText("No se ha seleccionado el registro");
-        } else {
-            label.setText("");
-            try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+    public void eliminarRegistro(String cedula1) {
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                 MongoDatabase db = mongo.getDatabase("futbolito");
                 MongoCollection<Document> col = db.getCollection("Usuarios");
-
-                String codigo = model.getValueAt(tabla.getSelectedRow(), 0).toString();
-                Document filter = new Document("cedula", codigo);
+                Document filter = new Document("cedula", cedula1);
                 col.deleteOne(filter);
-
-                model.removeRow(tabla.getSelectedRow());
-                label.setText("Registro eliminado");
-            } catch (Exception e) {
-                label.setText("No se ha eliminado el registro: " + e.getMessage());
-            }
         }
     }
     public void actualizarRegistro(JLabel label) {
@@ -262,6 +250,13 @@ public class Usuarios {
             label.setVisible(true);
         }
     }
+    public boolean seleccionarRegitro(JTable table1) {
+        if (table1.getSelectedRow() == -1) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean verClave(String txt, JLabel lbl){
         String encodcl = generateHash2(txt);
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){

@@ -17,9 +17,9 @@
         </constraints>
         <properties>
           <background color="-14473879"/>
-          <font name="Bernard MT Condensed" size="20"/>
+          <font name="Bernard MT Condensed" size="24"/>
           <foreground color="-1"/>
-          <text value="Mostrar canchas alquiladas"/>
+          <text value="Mostrar canchas reservadas"/>
         </properties>
       </component>
       <vspacer id="b568a">

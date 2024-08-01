@@ -52,5 +52,7 @@ public class duenio extends JFrame{
                 buscarBtn.setBackground(Color.black);
             }
         });
+        buscarBtn.addMouseListener(new MouseAdapter() {
+        });
     }
 }

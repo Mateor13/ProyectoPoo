@@ -1,8 +1,9 @@
 package Forms;
 
-import Clases.Usuarios;
+import Clases.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,7 +45,19 @@ public class gestionJugadores extends JFrame {
         elimBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                us.eliminarRegistro(tabl, ver);
+                DefaultTableModel model = (DefaultTableModel) tabl.getModel();
+               if(!us.seleccionarRegitro(tabl)){
+                     ver.setText("Seleccione un jugador");
+               }else{
+                    ver.setText("");
+                    String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
+                    String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
+                    Logeo.setCedula(cedula1);
+                    Logeo.setNombre(nombre1);
+                   new elimJugador();
+                   dispose();
+               }
+
             }
         });
         regBtn.addActionListener(new ActionListener() {

@@ -1,7 +1,9 @@
 package Forms;
+import Clases.Logeo;
 import Clases.cancha;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +47,18 @@ public class gestionCanchas extends JFrame{
         elimBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            can.eliminarRegistro(tablaCanchas, ver);
+                DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
+                if(!can.seleccionarRegitro(tablaCanchas)){
+                    ver.setText("Seleccione una Cancha");
+                }else{
+                    ver.setText("");
+                    String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
+                    String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
+                    Logeo.setCodigo(codigo);
+                    Logeo.setNombreCancha(nombre1);
+                    new elimCancha();
+                    dispose();
+                }
             }
         });
         regresarBtn.addActionListener(new ActionListener() {
