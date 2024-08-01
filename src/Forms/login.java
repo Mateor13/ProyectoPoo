@@ -21,7 +21,7 @@ public class login extends JFrame {
     private JLabel ver;
 
     public login() {
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Inicio de sesión");
         setContentPane(log);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

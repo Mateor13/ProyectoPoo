@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class inicio extends JFrame {
     private JPanel inicio;
@@ -19,6 +20,7 @@ public class inicio extends JFrame {
     private JLabel ver1;
 
     public inicio(){
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
         setTitle("Inicio");
         setContentPane(inicio);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

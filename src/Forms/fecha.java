@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class fecha extends JFrame {
     private JPanel pane;
@@ -17,7 +18,8 @@ public class fecha extends JFrame {
     private JButton regresarButton;
 
     public fecha() {
-        setTitle("Fecha");
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
+        setTitle("Fecha de reserva");
         setContentPane(pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 300));
