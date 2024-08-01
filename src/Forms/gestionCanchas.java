@@ -28,7 +28,7 @@ public class gestionCanchas extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         cancha can = new cancha();
-        can.mostrarCanchas(tablaCanchas);
+        actualizarCanchas(can);
 
         ingresarBtn.addActionListener(new ActionListener() {
             @Override
@@ -68,5 +68,8 @@ public class gestionCanchas extends JFrame{
                 dispose();
             }
         });
+    }
+    private void actualizarCanchas(cancha can){
+        can.mostrarCanchas(tablaCanchas);
     }
 }

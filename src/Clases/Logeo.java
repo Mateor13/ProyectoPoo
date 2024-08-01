@@ -2,6 +2,7 @@ package Clases;
 
 public class Logeo {
     private static String nombre, cedula, codigo, fecha, nombreCancha;
+    private static int numReserva;
 
     public static String getNombre() {
         return nombre;
@@ -41,5 +42,13 @@ public class Logeo {
 
     public static void setNombreCancha(String nombreCancha) {
         Logeo.nombreCancha = nombreCancha;
+    }
+
+    public static int getNumReserva() {
+        return numReserva;
+    }
+
+    public static void setNumReserva(int numReserva) {
+        Logeo.numReserva = numReserva;
     }
 }

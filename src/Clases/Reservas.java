@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class Reservas extends Logeo{
-    String fecha, cancha, cedula, codigo, nombre, horReservado;
+    String horReservado;
 
     public Reservas() {
     }
@@ -107,6 +107,7 @@ public class Reservas extends Logeo{
             lbl.setText("Reserva exitosa");
         }
     }
+
     public void mostrarReservasDuenio(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         tabla.setRowHeight(25);
@@ -132,4 +133,19 @@ public class Reservas extends Logeo{
             }
         }
     }
+
+    public boolean seleccionarReserva(JTable table){
+        return table.getSelectedRow() != -1;
+    }
+
+    public void eliminarRegistro(int codigo){
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Reservas");
+            Document doc = new Document("id", codigo);
+            col.deleteOne(doc);
+        }
+    }
+
 }
+

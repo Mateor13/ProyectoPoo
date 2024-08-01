@@ -101,6 +101,7 @@ public class cancha {
         tabla.setRowHeight(25);
         tabla.setBackground(new java.awt.Color(35,35,35));
         tabla.setForeground(new java.awt.Color(255,255,255));
+        model.setRowCount(0);
         model.addColumn("Número Cancha");
         model.addColumn("Nombre");
         model.addColumn("Dirección");
@@ -123,8 +124,8 @@ public class cancha {
             try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                 MongoDatabase db = mongo.getDatabase("futbolito");
                 MongoCollection<Document> col = db.getCollection("Canchas");
-                Document filter = new Document("id", codigo);
-                col.deleteOne(filter);
+                Document filtro = new Document("id", codigo);
+                col.deleteOne(filtro);
         }
     }
     public void actualizarRegistro(JLabel label) {
