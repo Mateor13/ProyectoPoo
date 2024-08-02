@@ -1,7 +1,7 @@
 package Clases;
 
 public class Logeo {
-    private static String nombre, cedula, codigo, fecha, nombreCancha;
+    private static String nombre, cedula, codigo, fecha, nombreCancha, horario;
     private static int numReserva;
 
     public static String getNombre() {
@@ -50,5 +50,13 @@ public class Logeo {
 
     public static void setNumReserva(int numReserva) {
         Logeo.numReserva = numReserva;
+    }
+
+    public static String getHorario() {
+        return horario;
+    }
+
+    public static void setHorario(String horario) {
+        Logeo.horario = horario;
     }
 }

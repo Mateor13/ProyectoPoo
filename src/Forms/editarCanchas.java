@@ -1,8 +1,6 @@
 package Forms;
 
 import Clases.Logeo;
-import com.mongodb.client.*;
-import org.bson.Document;
 import Clases.cancha;
 
 import javax.swing.*;
@@ -10,10 +8,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que permite editar las canchas.
+ * Esta clase proporciona una interfaz gráfica para editar las canchas,
+ * permitiendo al usuario cambiar el nombre, la dirección y el número de jugadores.
+ */
 public class editarCanchas extends JFrame {
-    private JTextField num;
     private JButton actualizarBtn;
-    private JButton buscarBtn;
     private JButton nomBtn;
     private JButton numJBtn;
     private JButton regresarBtn;
@@ -29,7 +30,11 @@ public class editarCanchas extends JFrame {
     private JLabel ver2;
     private JButton elegirBtn;
 
+    /**
+     * Inicializa la interfaz gráfica de editar canchas.
+     */
     private void inicializar() {
+        // Se inicializan los campos de texto y los botones.
         nomBtn.setVisible(true);
         dirBtn.setVisible(true);
         numJBtn.setVisible(true);
@@ -43,8 +48,14 @@ public class editarCanchas extends JFrame {
         ver2.setVisible(false);
         elegirBtn.setVisible(false);
     }
+    // Se crea una instancia de la clase cancha.
     cancha canc = new cancha();
+
+    /**
+     * Constructor de la clase editarCanchas.
+     */
     public editarCanchas() {
+        // Se establece el icono de la aplicación.
         setIconImage(new ImageIcon(getClass().getResource("../icono/cancha.png")).getImage());
         setTitle("Editar Canchas");
         setContentPane(edCancha);
@@ -54,53 +65,75 @@ public class editarCanchas extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+
+        // Se inicializa la interfaz gráfica.
         inicializar();
+        // Se establece el nombre de la cancha que se esta editando
         ver.setText("Editando Cancha: " + Logeo.getNombreCancha());
 
+        // Se establece la acción del botón de nombre.
         nomBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se muestra el campo para editar el nombre.
                 mostrarCampos("nombre");
             }
         });
 
+        // Se establece la acción del botón de dirección.
         dirBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se muestra el campo para editar la dirección.
                 mostrarCampos("direccion");
             }
         });
 
+        // Se establece la acción del botón de número de jugadores.
         numJBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se muestra el campo para editar el número de jugadores.
                 mostrarCampos("numJugadores");
             }
         });
 
+        // Se establece la acción del botón de elegir.
         elegirBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se muestra el campo para elegir las opciones de actualizacion de datos.
                 mostrarOpciones();
             }
         });
 
+        // Se establece la acción del botón de actualizar.
         actualizarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se captura el input del usuario.
                 capturarInput(canc);
+                // Se actualiza el registro de la cancha.
                 canc.actualizarRegistro(ver2);
             }
         });
+
+        // Se establece la acción del botón de regresar.
         regresarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Se regresa a la gestión de canchas.
                 new gestionCanchas();
                 dispose();
             }
         });
     }
+
+    /**
+     * Muestra las opciones de edición.
+     */
     private void mostrarOpciones() {
+        // Se muestran los botones para seleccionar las opciones de edición.
         nomBtn.setVisible(true);
         dirBtn.setVisible(true);
         numJBtn.setVisible(true);
@@ -117,10 +150,16 @@ public class editarCanchas extends JFrame {
         canc.setInput(null);
     }
 
+    /**
+     * Muestra los campos de edición.
+     * @param campo Campo a editar.
+     */
     private void mostrarCampos(String campo) {
+        // Se ocultan los campos de edición.
         nomBtn.setVisible(false);
         dirBtn.setVisible(false);
         numJBtn.setVisible(false);
+        // Se muestra el campo a editar.
         switch (campo) {
             case "nombre":
                 nomTxt.setVisible(true);
@@ -135,12 +174,18 @@ public class editarCanchas extends JFrame {
                 numJug.setVisible(true);
                 break;
         }
+        // Se muestran los botones de elegir y actualizar.
         elegirBtn.setVisible(true);
         actualizarBtn.setVisible(true);
         canc.setBtn(campo);
     }
 
+    /**
+     * Captura el input del usuario.
+     * @param canc Cancha a editar.
+     */
     private void capturarInput(cancha canc) {
+        // Se determina el campo a editar.
         switch (canc.getBtn()) {
             case "nombre":
                 canc.setInput(nomb.getText());
@@ -150,9 +195,11 @@ public class editarCanchas extends JFrame {
                 canc.setInput(dire.getText());
                 break;
             case "numJugadores":
+                // Se verifica que se haya seleccionado un número de jugadores.
                 if (numJug.getSelectedIndex() == 0) {
                     ver2.setText("Elija el número de jugadores");
                 } else {
+                    // Se captura el número de jugadores.
                     canc.setInput(numJug.getSelectedItem().toString());
                 }
                 break;

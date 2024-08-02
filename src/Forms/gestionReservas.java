@@ -40,6 +40,12 @@ public class gestionReservas extends JFrame {
                     DefaultTableModel model = (DefaultTableModel) tabl.getModel();
                     int codigo = Integer.parseInt((String) model.getValueAt(tabl.getSelectedRow(), 0));
                     Logeo.setNumReserva(codigo);
+                    Logeo.setNombreCancha((String) model.getValueAt(tabl.getSelectedRow(), 3));
+                    Logeo.setHorario((String) model.getValueAt(tabl.getSelectedRow(), 5));
+                    Logeo.setFecha((String) model.getValueAt(tabl.getSelectedRow(), 6));
+                    System.out.println(Logeo.getNumReserva());
+                    System.out.println(Logeo.getFecha());
+                    System.out.println(Logeo.getHorario());
                     new editarReservas();
                     dispose();
                 }
