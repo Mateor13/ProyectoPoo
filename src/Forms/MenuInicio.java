@@ -16,6 +16,7 @@ public class MenuInicio extends JFrame {
     private JButton ingresarBtn;
     private JButton cerrarBtn;
     private JPanel menu;
+    private JLabel img;
 
     /**
      * Constructor de la clase login.
@@ -33,6 +34,8 @@ public class MenuInicio extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+        // Mostrar imagen en label menu
+        img.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Imagen1.png"))));
         // Acción del botón "Ingresar"
         ingresarBtn.addActionListener(_ -> {
             // Cerrar la ventana actual y abrir el formulario de inicio de sesión

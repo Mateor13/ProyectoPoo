@@ -2,8 +2,14 @@ package Forms;
 import Clases.cancha;
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.types.Binary;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -21,6 +27,10 @@ public class adingrCan extends JFrame {
     private JButton regresarBtn;
     private JPanel regCan;
     private JLabel ver;
+    private JLabel img;
+    private JButton elegBtn;
+    // Variable global para almacenar los bytes de la imagen
+    private byte[] imageBytes;
 
     /**
      * Constructor de la clase adingrCan.
@@ -28,7 +38,7 @@ public class adingrCan extends JFrame {
      */
     public adingrCan() {
         // Configuración de la ventana
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/cancha.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Ingresar Cancha");
         setContentPane(regCan);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,66 +47,92 @@ public class adingrCan extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+        img.setVisible(false);
 
-        // Acción para el botón "Registrar"
+        // Crear objeto de la clase cancha
+        cancha canc = new cancha();
+
+        // Acción para el botón "Elegir Imagen"
+        elegBtn.addActionListener(_ -> {
+            // Crear un selector de archivos
+            JFileChooser fileChooser = new JFileChooser();
+            // Configurar el selector de archivos
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            // Configurar el filtro de archivos para imágenes
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagen", "jpg", "jpeg", "png"));
+            // Mostrar el selector de archivos y esperar a que el usuario seleccione un archivo
+            fileChooser.accept(fileChooser.getSelectedFile());
+            int result = fileChooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                try (FileInputStream foto = new FileInputStream(selectedFile)) {
+                    // Leer la imagen como un array de bytes
+                    imageBytes = foto.readAllBytes();
+
+                    // Mostrar la imagen en el JLabel con tamaño 100x100
+                    ImageIcon imageIcon = new ImageIcon(imageBytes);
+                    Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    img.setIcon(new ImageIcon(image));
+                    img.setVisible(true);
+
+                    ver.setText("Imagen subida con éxito");
+                } catch (IOException e) {
+                    ver.setText("Error al subir imagen: " + e.getMessage());
+                }
+            }
+        });
+
+// Acción para el botón "Registrar"
         registrarBtn.addActionListener(_ -> {
-            // Crear objeto de la clase cancha
-            cancha canc = new cancha();
             // Obtener los datos ingresados por el usuario
             canc.setNumero(num.getText());
             canc.setNombre(nom.getText());
             canc.setUbicacion(dir.getText());
-            if (numJug.getSelectedIndex() == 0){
+
+            if (numJug.getSelectedIndex() == 0) {
                 // Verificar si se ha seleccionado un número de jugadores
                 ver.setText("Elija el número de jugadores");
-            }else{
+            } else {
                 // Obtener el número de jugadores seleccionado
                 canc.setNumeroJugadores(Objects.requireNonNull(numJug.getSelectedItem()).toString());
             }
+
             // Verificar si se han ingresado todos los campos
-            canc.setNumeroJugadores(Objects.requireNonNull(numJug.getSelectedItem()).toString());
-            if (canc.getNumero().isEmpty()||canc.getNombre().isEmpty()||canc.getUbicacion().isEmpty()||canc.getNumeroJugadores().isEmpty()){
+            if (canc.getNumero().isEmpty() || canc.getNombre().isEmpty() || canc.getUbicacion().isEmpty() || canc.getNumeroJugadores().isEmpty()) {
                 ver.setText("Ingrese todos los campos");
+            } else if (!canc.vernumCan()) {
                 // Verificar si el número de canchas solo contiene 5 dígitos
-            }else if (!canc.vernumCan()){
-                ver.setText("El número de canchas solo puede contener 5 digitos");
-                // Verificar si el número de jugadores solo contiene 2 dígitos
-            }else{
+                ver.setText("El número de canchas solo puede contener 5 dígitos");
+            }else if (imageBytes == null) {
+                // Verificar si se ha subido una imagen
+                ver.setText("Suba una imagen de la cancha");
+            } else {
                 // Conexión a la base de datos
-                try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+                try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                     MongoDatabase db = mongo.getDatabase("futbolito");
                     MongoCollection<Document> col = db.getCollection("Canchas");
-                    // Crear un documento con los datos de la cancha
-                    Document doc = new Document("id", canc.getNumero());
-                    FindIterable<Document> iterable = col.find(doc);
-                    // Verificar si la cancha ya existe
-                    boolean numC = false;
-                    for (Document document : iterable) {
-                        String num = document.getString("id");
-                        // Mostrar mensaje si la cancha ya existe
-                        if (canc.getNumero().equals(num)){
-                            ver.setText("Cancha ya existente");
-                            numC = true;
-                            break;
-                        }
+
+                    // Crear documento con los datos de la cancha
+                    Document canchaDoc = new Document("id", canc.getNumero())
+                            .append("nombre", canc.getNombre())
+                            .append("direccion", canc.getUbicacion())
+                            .append("numJugadores", canc.getNumeroJugadores());
+
+                    // Agregar la imagen si está disponible
+                    if (imageBytes != null) {
+                        canchaDoc.append("imagen", new Binary(imageBytes));
                     }
-                    // Insertar la cancha en la base de datos
-                    if (!numC){
-                        // Crear un documento con los datos de la cancha
-                        Document docu = new Document("id", canc.getNumero())
-                                .append("nombre", canc.getNombre())
-                                .append("direccion", canc.getUbicacion())
-                                .append("numJugadores", canc.getNumeroJugadores());
-                        // Insertar el documento en la colección "Canchas"
-                        col.insertOne(docu);
-                        ver.setText("Cancha registrada");
-                    }
-                    // Mostrar mensaje si ocurre un error
-                } catch (Exception ex){
-                    ver.setText("Error al registrar cancha"+ ex.getMessage());
+
+                    // Insertar el documento en la colección
+                    col.insertOne(canchaDoc);
+
+                    ver.setText("Cancha registrada con éxito");
+                } catch (Exception e) {
+                    ver.setText("Error al registrar cancha: " + e.getMessage());
                 }
             }
         });
+
 
         // Acción para el botón "Regresar"
         regresarBtn.addActionListener(_ -> {

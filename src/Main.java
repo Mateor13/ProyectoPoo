@@ -1,4 +1,5 @@
 import Forms.*;
+
 /**
  * Clase principal que inicia la aplicación.
  */
@@ -9,6 +10,6 @@ public class Main {
      */
     public static void main(String[] args) {
         // Abre el form MenuInicio.
-       new elimJugador();
+        new MenuInicio();
     }
 }

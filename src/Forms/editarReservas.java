@@ -38,6 +38,7 @@ public class editarReservas extends JFrame {
      */
     public editarReservas() {
         // Configuración de la ventana
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Editar Reservas");
         setContentPane(pane);
         setPreferredSize(new Dimension(600,400));

@@ -39,7 +39,7 @@ public class editarCanchas extends JFrame {
      */
     public editarCanchas() {
         // Se establece el icono de la aplicación.
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/cancha.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Editar Canchas");
         setContentPane(edCancha);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

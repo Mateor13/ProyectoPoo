@@ -36,7 +36,7 @@ public class adingrUsu extends JFrame{
      */
     public adingrUsu() {
         // Configuración de la ventana
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Insertar Usuario");
         setContentPane(Pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

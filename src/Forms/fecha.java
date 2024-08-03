@@ -63,6 +63,7 @@ public class fecha extends JFrame {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(fecha1);
                     int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    // Se suma 1 al mes, ya que en Java los meses empiezan en 0.
                     int mes = cal.get(Calendar.MONTH) + 1;
                     int ano = cal.get(Calendar.YEAR);
                     // Guarda la fecha seleccionada en la clase Logeo.

@@ -24,7 +24,7 @@ public class buscarc extends JFrame {
      */
     public buscarc() {
         // Configuración de la ventana
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/cancha.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
         setTitle("Buscar Cliente");
         setContentPane(Bus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

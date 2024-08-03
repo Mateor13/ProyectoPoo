@@ -25,7 +25,7 @@ public class duenio extends JFrame{
      */
     public duenio() {
         // Configuración de la ventana
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/BACKING-BALON-FUTBOL-02.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
         setTitle("Menú encargados");
         setContentPane(due);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

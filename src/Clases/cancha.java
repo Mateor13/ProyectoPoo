@@ -2,9 +2,11 @@ package Clases;
 
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.types.Binary;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -166,6 +168,69 @@ public class cancha {
      * @param tabla Tabla en la cual se muestran las canchas.
      */
     public void mostrarCanchas(JTable tabla) {
+        // Creando un modelo de tabla.
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        // Estableciendo el tamaño de las filas de la tabla.
+        tabla.setRowHeight(100); // Ajustar el tamaño de la fila para la imagen
+        // Estableciendo el color de fondo y de la fuente de la tabla.
+        tabla.setBackground(new java.awt.Color(35, 35, 35));
+        tabla.setForeground(new java.awt.Color(255, 255, 255));
+        // Estableciendo el color de fondo y de la fuente de los encabezados de la tabla.
+        tabla.getTableHeader().setBackground(new java.awt.Color(35, 35, 35));
+        tabla.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+        // Limpiando la tabla.
+        model.setRowCount(0);
+        // Estableciendo los encabezados de la tabla.
+        model.setColumnIdentifiers(new Object[]{"Número Cancha", "Nombre", "Dirección", "Número jugadores", "Imagen"});
+        // Conectando a la base de datos de mongoDB.
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+            // Seleccionando la base de datos y la colección.
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Canchas");
+            // Obteniendo los registros de la base de datos.
+            FindIterable<Document> iter = col.find();
+            // Recorriendo los registros de la base de datos.
+            for (Document doc : iter) {
+                // Obteniendo los datos de la base de datos.
+                String numCancha = doc.getString("id");
+                String nom = doc.getString("nombre");
+                String dir = doc.getString("direccion");
+                String numJug = doc.getString("numJugadores");
+                // Convertir la imagen a bytes
+                byte[] imageBytes = null;
+
+                // Verificar si el campo "imagen" existe y no es nulo
+                if (doc.containsKey("imagen") && doc.get("imagen") != null) {
+                    // Obtener los bytes de la imagen
+                    imageBytes = doc.get("imagen", Binary.class).getData();
+                }
+
+                // Convertir los bytes de la imagen a ImageIcon si la imagen no es nula
+                ImageIcon imageIcon = null;
+                if (imageBytes != null) {
+                    // Mostrar la imagen en el JLabel con tamaño 100x100
+                    imageIcon = new ImageIcon(imageBytes);
+                    Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    imageIcon = new ImageIcon(image);
+                }
+
+                // Agregando los datos a la tabla.
+                model.addRow(new Object[]{numCancha, nom, dir, numJug, imageIcon});
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Imprimir la traza de la excepción para depuración
+        }
+
+        // Establecer el renderizador de celdas personalizado para la columna de imagen
+        tabla.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
+    }
+
+    /**
+     * Metodo que se encarga de mostrar la tabla de canchas para los administradores.
+     *
+     * @param tabla Tabla en la cual se muestran las canchas.
+     */
+    public void mostrarCanchas2(JTable tabla) {
         // Creando un modelo de tabla.
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         // Estableciendo el tamaño de las filas de la tabla.

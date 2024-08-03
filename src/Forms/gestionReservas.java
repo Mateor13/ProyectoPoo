@@ -5,6 +5,7 @@ import Clases.Reservas;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.Objects;
 
 /**
  * Clase para gestionar las reservas.
@@ -28,6 +29,7 @@ public class gestionReservas extends JFrame {
      */
     public gestionReservas() {
         // Configuración de la ventana
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Gestion de Reservas");
         setContentPane(pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

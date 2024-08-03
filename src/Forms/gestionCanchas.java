@@ -29,7 +29,7 @@ public class gestionCanchas extends JFrame{
      */
     public gestionCanchas (){
         // Configuración de la ventana
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Gestión de Canchas");
         setContentPane(gescan);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,6 +104,6 @@ public class gestionCanchas extends JFrame{
      */
     private void actualizarCanchas(cancha can){
         // Mostrar las canchas en la tabla
-        can.mostrarCanchas(tablaCanchas);
+        can.mostrarCanchas2(tablaCanchas);
     }
 }

@@ -42,6 +42,7 @@
         </constraints>
         <properties>
           <background color="-1744027"/>
+          <foreground color="-1"/>
           <text value="Regresar"/>
         </properties>
       </component>

@@ -47,7 +47,7 @@ public class editarJugadores extends JFrame {
      */
     public editarJugadores() {
         // Se establece el icono de la aplicación.
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.jpg"))).getImage());
         setTitle("Editar Jugadores");
         setContentPane(Pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
