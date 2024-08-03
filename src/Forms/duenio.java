@@ -2,8 +2,6 @@ package Forms;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -12,6 +10,8 @@ import java.util.Objects;
  * Clase para la interfaz gráfica del dueño.
  * Esta clase proporciona una interfaz gráfica para el dueño,
  * permitiendo al usuario buscar canchas y cerrar sesión.
+ *
+ * @extends JFrame definir sin definir el Frame
  */
 public class duenio extends JFrame{
 
@@ -36,23 +36,17 @@ public class duenio extends JFrame{
         setResizable(false);
 
         // Acción para el botón "Buscar Canchas"
-        buscarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Redirigir a la ventana de búsqueda de canchas
-                new buscarc();
-                dispose();
-            }
+        buscarBtn.addActionListener(_ -> {
+            // Redirigir a la ventana de búsqueda de canchas
+            new buscarc();
+            dispose();
         });
 
         // Acción para el botón "Cerrar Sesión"
-        cerrarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Redirigir a la ventana de inicio de sesión
-                new login();
-                dispose();
-            }
+        cerrarBtn.addActionListener(_ -> {
+            // Redirigir a la ventana de inicio de sesión
+            new login();
+            dispose();
         });
 
         // Cambiar color de fondo al pasar el mouse por encima

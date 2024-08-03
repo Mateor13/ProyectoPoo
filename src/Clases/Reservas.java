@@ -4,10 +4,10 @@ import org.bson.Document;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Objects;
 
 /**
- * La clase Usuarios representa un usuario con varios atributos y métodos para
- * gestionar la validación, cifrado y operaciones CRUD con una base de datos MongoDB.
+ * La clase Reservas se encarga de realizar las operaciones CRUD de las reservas.
  */
 public class Reservas extends Logeo{
     String horReservado, input, btn;
@@ -18,9 +18,9 @@ public class Reservas extends Logeo{
      */
     public Reservas() {
     }
+
     /**
      * Constructor con parámetros de la clase Reservas.
-     *
      * @param horReservado Horario reservado.
      * @param input valor del atributo el cual se va a actualizar.
      * @param btn atributo al cual se realizará una actualización.
@@ -28,7 +28,6 @@ public class Reservas extends Logeo{
      * @param mes mes de la reserva.
      * @param anio año de la reserva.
      */
-
     public Reservas(String horReservado, String input, String btn, int dia, int mes, int anio) {
         this.horReservado = horReservado;
         this.input = input;
@@ -53,14 +52,6 @@ public class Reservas extends Logeo{
      */
     public void setHorReservado(String horReservado) {
         this.horReservado = horReservado;
-    }
-
-    /**
-     * Obtiene el valor del atributo a actualizar.
-     * @return valor del atributo a actualizar
-     */
-    public String getInput() {
-        return input;
     }
 
     /**
@@ -215,7 +206,7 @@ public class Reservas extends Logeo{
      * @param box caja de opciones de los horarios.
      */
     public void tomarValor(JComboBox box) {
-            setHorReservado(box.getSelectedItem().toString());
+            setHorReservado(Objects.requireNonNull(box.getSelectedItem()).toString());
             }
 
     //verificar horario disponible
@@ -263,7 +254,7 @@ public class Reservas extends Logeo{
                     .append("nombreCancha", Logeo.getNombreCancha());
             // Buscar si hay una reserva para esa fecha y horario
             FindIterable<Document> iter = col.find(doc);
-            return iter.first() == null; // Devuelve true si no hay reserva para esa fecha y horario
+            return iter.first() != null; // Devuelve true si no hay reserva para esa fecha y horario
         }
     }
 
@@ -337,7 +328,7 @@ public class Reservas extends Logeo{
      * @return true si se ha seleccionado una reserva, false en caso contrario
      */
     public boolean seleccionarReserva(JTable table){
-        return table.getSelectedRow() != -1;
+        return table.getSelectedRow() == -1;
     }
 
     //Eliminar reserva

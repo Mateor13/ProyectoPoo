@@ -21,7 +21,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="45279" class="javax.swing.JButton" binding="buscarButton" default-binding="true">
+      <component id="45279" class="javax.swing.JButton" binding="busBtn">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -32,7 +32,7 @@
           <text value="Ver Horarios"/>
         </properties>
       </component>
-      <component id="2f2b0" class="javax.swing.JButton" binding="cerrarSesiónButton" default-binding="true">
+      <component id="2f2b0" class="javax.swing.JButton" binding="cerrBtn">
         <constraints>
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -81,6 +81,7 @@
         </constraints>
         <properties>
           <foreground color="-1"/>
+          <labelFor value="8c434"/>
           <text value="Elija la cancha a alquilar"/>
         </properties>
       </component>

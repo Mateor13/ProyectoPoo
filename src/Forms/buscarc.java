@@ -3,13 +3,13 @@ import Clases.Reservas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 /**
  * Clase para la interfaz gráfica de buscar cliente.
  * Esta clase proporciona una interfaz gráfica para buscar un cliente y mostrar sus reservas.
+ *
+ * @extends JFrame definir sin definir el Frame
  */
 public class buscarc extends JFrame {
     private JTable canc;
@@ -39,29 +39,23 @@ public class buscarc extends JFrame {
         canc.setVisible(false);
 
         // Acción para el botón "Buscar"
-        buscarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Ocultar el botón "Buscar" y mostrar la tabla de reservas
-                buscarBtn.setVisible(false);
-                scroll.setVisible(true);
-                canc.setVisible(true);
-                regBtn.setVisible(true);
-                // Crear objeto de la clase Reservas
-                Reservas res = new Reservas();
-                // Mostrar las reservas del cliente en modo Dueño
-                res.mostrarReservasDuenio(canc);
-            }
+        buscarBtn.addActionListener(_ -> {
+            // Ocultar el botón "Buscar" y mostrar la tabla de reservas
+            buscarBtn.setVisible(false);
+            scroll.setVisible(true);
+            canc.setVisible(true);
+            regBtn.setVisible(true);
+            // Crear objeto de la clase Reservas
+            Reservas res = new Reservas();
+            // Mostrar las reservas del cliente en modo Dueño
+            res.mostrarReservasDuenio(canc);
         });
 
         // Acción para el botón "Regresar"
-        regBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Redirigir a la ventana de dueño
-                new duenio();
-                dispose();
-            }
+        regBtn.addActionListener(_ -> {
+            // Redirigir a la ventana de dueño
+            new duenio();
+            dispose();
         });
     }
 }

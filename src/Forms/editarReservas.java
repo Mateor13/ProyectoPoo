@@ -6,15 +6,16 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Clase para editar reservas.
  * Esta clase proporciona una interfaz gráfica para editar reservas,
  * permitiendo al usuario cambiar la fecha y el horario de una reserva.
+ *
+ * @extends JFrame definir sin definir el Frame
  */
 public class editarReservas extends JFrame {
     private JButton fecBtn;
@@ -51,56 +52,41 @@ public class editarReservas extends JFrame {
         inicializar();
 
         // Acción para el botón "Fecha"
-        fecBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Mostrar los campos de fecha
-                mostrarCampos("fecReservada");
-            }
+        fecBtn.addActionListener(_ -> {
+            // Mostrar los campos de fecha
+            mostrarCampos("fecReservada");
         });
 
         // Acción para el botón "Horario"
-        horJBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Mostrar los campos de horario
-                mostrarCampos("horReservada");
-            }
+        horJBtn.addActionListener(_ -> {
+            // Mostrar los campos de horario
+            mostrarCampos("horReservada");
         });
 
         // Acción para el botón "Actualizar"
-        actBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Verificar si los campos son válidos
-                if (validarCampos()){
-                    // Capturar la entrada del usuario
-                    capturarInput(res);
-                    // Actualizar la reserva
-                    res.actualizarRegistro(ver2);
-                }
+        actBtn.addActionListener(_ -> {
+            // Verificar si los campos son válidos
+            if (validarCampos()){
+                // Capturar la entrada del usuario
+                capturarInput(res);
+                // Actualizar la reserva
+                res.actualizarRegistro(ver2);
             }
         });
 
         // Acción para el botón "Elegir"
-        elegBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Inicializar los campos
-                inicializar();
-                // Limpiar el campo de texto
-                ver2.setText("");
-            }
+        elegBtn.addActionListener(_ -> {
+            // Inicializar los campos
+            inicializar();
+            // Limpiar el campo de texto
+            ver2.setText("");
         });
 
         // Acción para el botón "Regresar"
-        regBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Regresar a la ventana de gestión de reservas
-                new gestionReservas();
-                dispose();
-            }
+        regBtn.addActionListener(_ -> {
+            // Regresar a la ventana de gestión de reservas
+            new gestionReservas();
+            dispose();
         });
     }
 
@@ -160,7 +146,7 @@ public class editarReservas extends JFrame {
                 // Se almacena la fecha seleccionada en el formato "dd/mm/aaaa"
                 String fecSeleccionada = res.getDia()+"/"+res.getMes()+"/"+res.getAnio();
                 // Se almacena la fecha seleccionada en Logeo
-                if (!res.verificarDisponibilidad(fecSeleccionada, Logeo.getHorario())){
+                if (res.verificarDisponibilidad(fecSeleccionada, Logeo.getHorario())){
                     ver2.setText("La fecha y horario seleccionados ya están reservados");
                     return false;
                 }
@@ -180,7 +166,7 @@ public class editarReservas extends JFrame {
                 return false;
             }
             // Si se ha seleccionado un horario que ya se ha reservado
-            if (!res.verificarDisponibilidad(Logeo.getFecha(), hor.getSelectedItem().toString())){
+            if (res.verificarDisponibilidad(Logeo.getFecha(), Objects.requireNonNull(hor.getSelectedItem()).toString())){
                 ver2.setText("La fecha y horario seleccionados ya están reservados");
                 return false;
             }
@@ -212,7 +198,7 @@ public class editarReservas extends JFrame {
                 break;
             case "horReservada":
                 // Obtener el horario seleccionado del box de horarios
-                String nuevoHorario = hor.getSelectedItem().toString();
+                String nuevoHorario = Objects.requireNonNull(hor.getSelectedItem()).toString();
                 // Almacenar el horario seleccionado en Logeo y en Input
                 Logeo.setHorario(nuevoHorario);
                 res.setInput(nuevoHorario);

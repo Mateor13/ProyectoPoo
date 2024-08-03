@@ -5,13 +5,14 @@ import Clases.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Objects;
 
 /**
  * Clase para gestionar las canchas.
  * Esta clase proporciona una interfaz gráfica para la gestión de canchas,
  * permitiendo al usuario ingresar, editar, eliminar y ver canchas en una tabla.
+ *
+ * @extends JFrame sin definir el frame.
  */
 public class gestionCanchas extends JFrame{
     private JPanel gescan;
@@ -28,7 +29,7 @@ public class gestionCanchas extends JFrame{
      */
     public gestionCanchas (){
         // Configuración de la ventana
-        setIconImage(new ImageIcon(getClass().getResource("../icono/cancha.png")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/Admin.png"))).getImage());
         setTitle("Gestión de Canchas");
         setContentPane(gescan);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,68 +44,56 @@ public class gestionCanchas extends JFrame{
         actualizarCanchas(can);
 
         // Acción para el botón "Ingresar"
-        ingresarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Cerrar la ventana actual y abrir la ventana de ingreso de canchas
-                new adingrCan();
-                dispose();
-            }
+        ingresarBtn.addActionListener(_ -> {
+            // Cerrar la ventana actual y abrir la ventana de ingreso de canchas
+            new adingrCan();
+            dispose();
         });
 
         // Acción para el botón "Editar"
-        editarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Verificar si se ha seleccionado una cancha
-                if (!can.seleccionarRegitro(tablaCanchas)) {
-                    ver.setText("Seleccione una Cancha");
-                } else {
-                    // Cerrar la ventana actual y abrir la ventana de edición de canchas
-                    ver.setText("");
-                    // Obtener el código y nombre de la cancha seleccionada
-                    DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
-                    // Establecer el código y nombre de la cancha seleccionada
-                    String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
-                    String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
-                    Logeo.setCodigo(codigo);
-                    Logeo.setNombreCancha(nombre1);
-                    new editarCanchas();
-                    dispose();
-                }
+        editarBtn.addActionListener(_ -> {
+            // Verificar si se ha seleccionado una cancha
+            if (can.seleccionarRegitro(tablaCanchas)) {
+                ver.setText("Seleccione una Cancha");
+            } else {
+                // Cerrar la ventana actual y abrir la ventana de edición de canchas
+                ver.setText("");
+                // Obtener el código y nombre de la cancha seleccionada
+                DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
+                // Establecer el código y nombre de la cancha seleccionada
+                String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
+                String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
+                Logeo.setCodigo(codigo);
+                Logeo.setNombreCancha(nombre1);
+                new editarCanchas();
+                dispose();
             }
         });
 
         // Acción para el botón "Eliminar"
-        elimBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Verificar si se ha seleccionado una cancha
-                DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
-                if(!can.seleccionarRegitro(tablaCanchas)){
-                    ver.setText("Seleccione una Cancha");
-                }else{
-                    // Cerrar la ventana actual y abrir la ventana de eliminación de canchas
-                    ver.setText("");
-                    // Obtener el código y nombre de la cancha seleccionada
-                    String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
-                    String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
-                    Logeo.setCodigo(codigo);
-                    Logeo.setNombreCancha(nombre1);
-                    new elimCancha();
-                    dispose();
-                }
+        elimBtn.addActionListener(_ -> {
+            // Verificar si se ha seleccionado una cancha
+            DefaultTableModel model = (DefaultTableModel) tablaCanchas.getModel();
+            if(can.seleccionarRegitro(tablaCanchas)){
+                ver.setText("Seleccione una Cancha");
+            }else{
+                // Cerrar la ventana actual y abrir la ventana de eliminación de canchas
+                ver.setText("");
+                // Obtener el código y nombre de la cancha seleccionada
+                String codigo = model.getValueAt(tablaCanchas.getSelectedRow(), 0).toString();
+                String nombre1 = model.getValueAt(tablaCanchas.getSelectedRow(), 1).toString();
+                Logeo.setCodigo(codigo);
+                Logeo.setNombreCancha(nombre1);
+                new elimCancha();
+                dispose();
             }
         });
 
         // Acción para el botón "Regresar"
-        regresarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Cerrar la ventana actual y abrir la ventana de administrador
-                new admin();
-                dispose();
-            }
+        regresarBtn.addActionListener(_ -> {
+            // Cerrar la ventana actual y abrir la ventana de administrador
+            new admin();
+            dispose();
         });
     }
 
@@ -114,6 +103,7 @@ public class gestionCanchas extends JFrame{
      * @param can Objeto de la clase cancha que contiene la información de las canchas.
      */
     private void actualizarCanchas(cancha can){
+        // Mostrar las canchas en la tabla
         can.mostrarCanchas(tablaCanchas);
     }
 }

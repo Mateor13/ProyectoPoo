@@ -4,16 +4,17 @@ import Clases.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Clase que permite editar los datos de los jugadores.
  * Esta clase proporciona una interfaz gráfica para editar los jugadores,
  * permitiendo al usuario cambiar el nombre, apellido, correo, fecha de nacimiento, teléfono y contraseña.
+ *
+ * @extends JFrame definir sin definir el Frame
  */
 public class editarJugadores extends JFrame {
     private JPanel Pane;
@@ -46,7 +47,7 @@ public class editarJugadores extends JFrame {
      */
     public editarJugadores() {
         // Se establece el icono de la aplicación.
-        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
         setTitle("Editar Jugadores");
         setContentPane(Pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,123 +61,93 @@ public class editarJugadores extends JFrame {
         // Se establece el nombre del jugador que se está editando.
         ver.setText("Editando a: " + Logeo.getNombre());
 
-        // Se añade un ActionListener al botón nombre
-        nomBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar el nuevo nombre.
-                mostrarCampos("nombre");
-            }
+        // Se añade un ActionListener al botón, nombre
+        nomBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar el nuevo nombre.
+            mostrarCampos("nombre");
         });
 
         // Se añade un ActionListener al botón apellido
-        apeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar el nuevo apellido.
-                mostrarCampos("apellido");
-            }
+        apeBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar el nuevo apellido.
+            mostrarCampos("apellido");
         });
 
         // Se añade un ActionListener al botón correo
-        corBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar el nuevo correo.
-                mostrarCampos("correo");
-            }
+        corBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar el nuevo correo.
+            mostrarCampos("correo");
         });
 
         // Se añade un ActionListener al botón fecha de nacimiento
-        fecBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar la nueva fecha de nacimiento.
-                mostrarCampos("fechaNacimiento");
-            }
+        fecBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar la nueva fecha de nacimiento.
+            mostrarCampos("fechaNacimiento");
         });
 
         // Se añade un ActionListener al botón teléfono
-        telBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar el nuevo teléfono.
-                mostrarCampos("celular");
-            }
+        telBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar el nuevo teléfono.
+            mostrarCampos("celular");
         });
 
         // Se añade un ActionListener al botón contraseña
-        conBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para ingresar la nueva contraseña.
-                mostrarCampos("confclave");
-            }
+        conBtn.addActionListener(_ -> {
+            // Se muestra el campo para ingresar la nueva contraseña.
+            mostrarCampos("confclave");
         });
 
         // Se añade un ActionListener al botón verificar
-        verBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se verifica si se ingresó la contraseña.
-                if (cont.getPassword().length==0) {
-                    ver2.setText("Ingrese la contraseña");
-                    // Se verifica si la contraseña es correcta.
-                } else if (usu.verClave(new String(cont.getPassword()), ver2)) {
-                    // Se muestra el campo para ingresar la nueva contraseña.
-                    mostrarCampos("clave");
-                    con.setText("");
-                    confcla.setText("");
-                }
+        verBtn.addActionListener(_ -> {
+            // Se verifica si se ingresó la contraseña.
+            if (cont.getPassword().length==0) {
+                ver2.setText("Ingrese la contraseña");
+                // Se verifica si la contraseña es correcta.
+            } else if (usu.verClave(new String(cont.getPassword()), ver2)) {
+                // Se muestra el campo para ingresar la nueva contraseña.
+                mostrarCampos("clave");
+                con.setText("");
+                confcla.setText("");
             }
         });
 
         // Se añade un ActionListener al botón actualizar
-        actuBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se verifica si los campos son válidos.
-                if (validarCampos()) {
-                    // Se verifica si se seleccionó el campo de contraseña.
-                    if (usu.getBtn().equals("clave")){
-                        // Se toma la contraseña dada
-                        capturarInput(usu);
-                        // Se actualiza el registro del jugador.
-                        usu.actualizarRegistro(ver2);
-                        // Se muestra el campo para ingresar la nueva contraseña actual, una vez ingresada la nueva contraseña.
-                        mostrarCampos("confclave");
-                        cont.setText("");
-                        ver2.setText("");
-                        // Se muestra un mensaje de confirmación del cambio de contraseña.
-                        JOptionPane.showMessageDialog(null, "Contraseña actualizada");
-                    }else {
-                        // Se captura el input del usuario de los demás atributos.
-                        capturarInput(usu);
-                        // Se actualiza el registro del jugador.
-                        usu.actualizarRegistro(ver2);
-                    }
+        actuBtn.addActionListener(_ -> {
+            // Se verifica si los campos son válidos.
+            if (validarCampos()) {
+                // Se verifica si se seleccionó el campo de contraseña.
+                if (usu.getBtn().equals("clave")){
+                    // Se toma la contraseña dada
+                    capturarInput(usu);
+                    // Se actualiza el registro del jugador.
+                    usu.actualizarRegistro(ver2);
+                    // Se muestra el campo para ingresar la nueva contraseña actual, una vez ingresada la nueva contraseña.
+                    mostrarCampos("confclave");
+                    cont.setText("");
+                    ver2.setText("");
+                    // Se muestra un mensaje de confirmación del cambio de contraseña.
+                    JOptionPane.showMessageDialog(null, "Contraseña actualizada");
+                }else {
+                    // Se captura el input del usuario de los demás atributos.
+                    capturarInput(usu);
+                    // Se actualiza el registro del jugador.
+                    usu.actualizarRegistro(ver2);
                 }
             }
         });
 
         // Se añade un ActionListener al botón elegir
-        elegBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se muestra el campo para elegir las opciones de actualización de datos.
-                inicializar();
-                ver2.setText("");
-            }
+        elegBtn.addActionListener(_ -> {
+            // Se muestra el campo para elegir las opciones de actualización de datos.
+            inicializar();
+            ver2.setText("");
         });
 
         // Se añade un ActionListener al botón regresar
-        regrBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Se regresa a la gestión de jugadores.
-                new gestionJugadores();
-                dispose();
-            }
+        regrBtn.addActionListener(_ -> {
+            // Se regresa a la gestión de jugadores.
+            new gestionJugadores();
+            dispose();
         });
     }
 
@@ -235,7 +206,7 @@ public class editarJugadores extends JFrame {
     }
 
     /**
-     * Valida los campos ingresados por el usuario.
+     * Válida los campos ingresados por el usuario.
      * @return true si los campos son válidos, false si no lo son.
      */
     private boolean validarCampos() {

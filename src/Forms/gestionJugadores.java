@@ -4,10 +4,17 @@ import Clases.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Objects;
 
+/**
+ * Clase para gestionar los jugadores.
+ * Esta clase proporciona una interfaz gráfica para la gestión de jugadores,
+ * permitiendo al usuario ingresar, editar, eliminar y ver jugadores en una tabla.
+ *
+ * @extends JFrame sin definir el frame.
+ */
 public class gestionJugadores extends JFrame {
+    // Componentes de la ventana.
     private JTable tabl;
     private JButton inserBtn;
     private JButton editBtn;
@@ -15,10 +22,16 @@ public class gestionJugadores extends JFrame {
     private JButton regBtn;
     private JPanel Panel;
     private JLabel ver;
-
+    // Crear objeto de la clase Usuarios
     Usuarios us = new Usuarios();
+
+    /**
+     * Constructor de la clase gestionJugadores.
+     * Configura la interfaz gráfica y establece los escuchadores de eventos para los botones.
+     */
     public gestionJugadores() {
-        setIconImage(new ImageIcon(getClass().getResource("../icono/User.png")).getImage());
+        // Configuración de la ventana
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("../icono/User.png"))).getImage());
         setTitle("Gestión de Jugadores");
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,55 +40,68 @@ public class gestionJugadores extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+        // Actualizar la tabla de jugadores
         us.mostrarUsuarios(tabl);
-        inserBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new adingrUsu();
-                dispose();
-            }
-        });
-        editBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DefaultTableModel model = (DefaultTableModel) tabl.getModel();
-                if(!us.seleccionarRegitro(tabl)){
-                    ver.setText("Seleccione un jugador");
-                }else{
-                    ver.setText("");
-                    String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
-                    String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
-                    Logeo.setCedula(cedula1);
-                    Logeo.setNombre(nombre1);
-                    new editarJugadores();
-                    dispose();
-                }
-            }
-        });
-        elimBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DefaultTableModel model = (DefaultTableModel) tabl.getModel();
-               if(!us.seleccionarRegitro(tabl)){
-                     ver.setText("Seleccione un jugador");
-               }else{
-                    ver.setText("");
-                    String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
-                    String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
-                    Logeo.setCedula(cedula1);
-                    Logeo.setNombre(nombre1);
-                   new elimJugador();
-                   dispose();
-               }
 
-            }
+        // Acción para el botón "Ingresar"
+        inserBtn.addActionListener(_ -> {
+            // Cerrar la ventana actual y abrir la ventana de ingreso de jugadores
+            new adingrUsu();
+            dispose();
         });
-        regBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new admin();
+
+        // Acción para el botón "Editar"
+        editBtn.addActionListener(_ -> {
+            // Crear objeto de la clase Usuarios
+            DefaultTableModel model = (DefaultTableModel) tabl.getModel();
+            // Verificar si se ha seleccionado un jugador de la tabla
+            if(us.seleccionarRegitro(tabl)){
+                // Mostrar mensaje de error
+                ver.setText("Seleccione un jugador");
+            }else{
+                // Limpiar mensaje de error
+                ver.setText("");
+                // Obtener los datos del jugador seleccionado de la tabla
+                String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
+                String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
+                // Guardar los datos del jugador seleccionado en la clase Logeo
+                Logeo.setCedula(cedula1);
+                Logeo.setNombre(nombre1);
+                // Cerrar la ventana actual y abrir la ventana de edición de jugadores
+                new editarJugadores();
                 dispose();
             }
+        });
+
+        // Acción para el botón "Eliminar"
+        elimBtn.addActionListener(_ -> {
+            // Crear objeto de la clase Usuarios
+            DefaultTableModel model = (DefaultTableModel) tabl.getModel();
+            // Verificar si se ha seleccionado un jugador de la tabla
+           if(us.seleccionarRegitro(tabl)){
+               // Mostrar mensaje de error
+                 ver.setText("Seleccione un jugador");
+           }else{
+               // Limpiar mensaje de error
+                ver.setText("");
+                // Obtener los datos del jugador seleccionado de la tabla
+                String cedula1 = model.getValueAt(tabl.getSelectedRow(), 0).toString();
+                String nombre1 = model.getValueAt(tabl.getSelectedRow(), 1).toString();
+                // Guardar los datos del jugador seleccionado en la clase Logeo
+                Logeo.setCedula(cedula1);
+                Logeo.setNombre(nombre1);
+                // Cerrar la ventana actual y abrir la ventana de eliminación de jugadores
+               new elimJugador();
+               dispose();
+           }
+
+        });
+
+        // Acción para el botón "Regresar"
+        regBtn.addActionListener(_ -> {
+            // Cerrar la ventana actual y abrir la ventana de administrador
+            new admin();
+            dispose();
         });
     }
 }

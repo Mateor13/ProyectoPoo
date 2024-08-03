@@ -5,6 +5,12 @@ import Clases.Usuarios;
 
 import javax.swing.*;
 
+/**
+ * Clase que muestra la ventana de eliminación de un jugador.
+ * @extends JFrame definir sin definir el Frame
+ *
+ * @extends JFrame definir sin definir el Frame
+ */
 public class elimJugador extends JFrame{
     private JButton canBtn;
     private JButton acepBtn;
@@ -20,21 +26,15 @@ public class elimJugador extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         ver.setText("¿Está seguro de eliminar el jugador " + Logeo.getNombre() + "?");
-        canBtn.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                new gestionJugadores();
-                dispose();
-            }
+        canBtn.addActionListener(_ -> {
+            new gestionJugadores();
+            dispose();
         });
-        acepBtn.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Usuarios us = new Usuarios();
-                us.eliminarRegistro(Logeo.getCedula());
-                new gestionJugadores();
-                dispose();
-            }
+        acepBtn.addActionListener(_ -> {
+            Usuarios us = new Usuarios();
+            us.eliminarRegistro(Logeo.getCedula());
+            new gestionJugadores();
+            dispose();
         });
     }
 }

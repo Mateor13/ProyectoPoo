@@ -300,9 +300,11 @@ public class Usuarios {
      * @return true si el correo es válido, false de lo contrario.
      */
     public boolean verCorreo() {
-        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        // Define el patrón de un correo electrónico
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        // Verifica si el correo coincide con el patrón
         Matcher matcher = patron.matcher(getEmail());
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     /**
@@ -312,7 +314,9 @@ public class Usuarios {
      * @return true si el texto es un correo válido, false de lo contrario.
      */
     public boolean verCorreo2(String text) {
-        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        // Define el patrón de un correo electrónico
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        // Verifica si el correo coincide con el patrón
         Matcher matcher = patron.matcher(text);
         return matcher.matches();
     }
@@ -327,7 +331,7 @@ public class Usuarios {
         Pattern patron = Pattern.compile("^09\\d{8}$");
         // Verifica si el teléfono coincide con el patrón
         Matcher tel = patron.matcher(getTelefono());
-        return tel.matches();
+        return !tel.matches();
     }
 
     /**
@@ -354,7 +358,7 @@ public class Usuarios {
         Pattern patron = Pattern.compile("^\\d{10}$");
         // Verifica si la cédula coincide con el patrón
         Matcher ced = patron.matcher(getCedula());
-        return ced.matches();
+        return !ced.matches();
     }
 
     /**
@@ -511,7 +515,7 @@ public class Usuarios {
      * @return true si hay un registro seleccionado, false de lo contrario.
      */
     public boolean seleccionarRegitro(JTable table1) {
-        return table1.getSelectedRow() != -1;
+        return table1.getSelectedRow() == -1;
     }
 
     /**
