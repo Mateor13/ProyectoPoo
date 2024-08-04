@@ -6,9 +6,9 @@ import java.awt.*;
 
 /**
  * Clase para renderizar imágenes en una tabla.
- * Esta clase permite renderizar imágenes en una tabla de Java.
+ * Esta clase permite renderizar imágenes en una tabla de Java, permite que se muestre la imagen al definrla.
  *
- * @extends DefaultTableCellRenderer sin definir el renderizador por defecto.
+ * @extends Renderizas la imagen en la tabla, y sea posible mostrarle
  */
 class ImageRenderer extends DefaultTableCellRenderer {
     @Override
