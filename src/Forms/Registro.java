@@ -78,6 +78,9 @@ public class Registro extends JFrame {
             us.setClave(clave.getText());
             us.setClaveconf(claveconf.getText());
 
+            //Poner el label con el color rojo
+            ver.setForeground(Color.red);
+
             // Si alguno de los campos está vacío, se muestra un mensaje de error
             if (us.getNombre().isEmpty() || us.getApellido().isEmpty() || us.getEmail().isEmpty() || us.getCedula().isEmpty() || us.getTelefono().isEmpty() || fechaSeleccionada == null || us.getClave().isEmpty()) {
                 ver.setText("Hay campos vacíos. Ingrese todos los campos");
@@ -116,10 +119,23 @@ public class Registro extends JFrame {
                         for (Document documents : iterable) {
                             // Se obtiene la cédula y el correo de los documentos
                             String cedula = documents.getString("cedula");
-                            String email = documents.getString("email");
+                            String email = documents.getString("correo");
+                            String num = documents.getString("celular");
                             // Si la cédula o el correo del usuario ya existen, se muestra un mensaje de error
-                            if (us.getCedula().equals(cedula) || us.getEmail().equals(email)) {
-                                ver.setText("Usuario existente");
+                            if (us.getEmail().equals(email)) {
+                                ver.setText("Email ya registrado");
+                                // Se asigna true a la variable para indicar que el usuario ya existe
+                                userExists = true;
+                                break;
+                            }
+                            if (us.getTelefono().equals(num)){
+                                ver.setText("Número de teléfono ya registrado");
+                                // Se asigna true a la variable para indicar que el usuario ya existe
+                                userExists = true;
+                                break;
+                            }
+                            if (us.getCedula().equals(cedula)){
+                                ver.setText("Cédula ya registrada");
                                 // Se asigna true a la variable para indicar que el usuario ya existe
                                 userExists = true;
                                 break;
@@ -140,6 +156,7 @@ public class Registro extends JFrame {
                         // Inserción del documento en la colección "Usuarios"
                         col.insertOne(docu);
                         // Mensaje de éxito
+                        ver.setForeground(Color.white);
                         ver.setText("Usuario registrado");
                     }
                 // Captura de excepciones

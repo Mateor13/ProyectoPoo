@@ -81,10 +81,15 @@ public class editarCanchas extends JFrame {
 
         // Se establece la acción del botón de actualizar.
         actualizarBtn.addActionListener(_ -> {
-            // Se captura el input del usuario.
-            capturarInput(canc);
-            // Se actualiza el registro de la cancha.
-            canc.actualizarRegistro(ver2);
+            if (validacion()){
+                // Se captura el input del usuario.
+                capturarInput(canc);
+                // Se actualiza el registro de la cancha.
+                canc.actualizarRegistro(ver2);
+            }else{
+                ver2.setVisible(true);
+            }
+
         });
 
         // Se establece la acción del botón de regresar.
@@ -144,6 +149,31 @@ public class editarCanchas extends JFrame {
         elegirBtn.setVisible(true);
         actualizarBtn.setVisible(true);
         canc.setBtn(campo);
+    }
+
+    private boolean validacion(){
+
+        if (nomBtn.isVisible()){
+            if (nomb.getText().isEmpty()){
+                ver2.setText("Ingrese un nombre");
+                return false;
+            }
+        }
+
+        if (dirBtn.isVisible()){
+            if (dire.getText().isEmpty()){
+                ver2.setText("Ingrese una dirección");
+                return false;
+            }
+        }
+
+        if (numJBtn.isVisible()){
+            if (numJug.getSelectedIndex() == 0){
+                ver2.setText("Elija el número de jugadores");
+                return false;
+            }
+        }
+    return true;
     }
 
     /**

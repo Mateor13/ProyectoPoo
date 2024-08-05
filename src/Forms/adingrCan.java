@@ -9,7 +9,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -106,6 +105,8 @@ public class adingrCan extends JFrame {
             }else if (imageBytes == null) {
                 // Verificar si se ha subido una imagen
                 ver.setText("Suba una imagen de la cancha");
+            } else if (canc.canExistente()) {
+                ver.setText("Número de cancha ya registrado");
             } else {
                 // Conexión a la base de datos
                 try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {

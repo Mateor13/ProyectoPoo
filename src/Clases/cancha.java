@@ -153,6 +153,29 @@ public class cancha {
     }
 
     /**
+     * Método que se encarga de verificar si el número de la cancha ya existe en la base de datos.
+     *
+     * @return True si el número de la cancha ya existe en la base de datos, false en caso contrario.
+     */
+    public boolean canExistente (){
+        // Conectando a la base de datos de mongoDB.
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")){
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            MongoCollection<Document> col = db.getCollection("Canchas");
+            // Creando un filtro para buscar el número de la cancha.
+            Document filtro = new Document("id", getNumero());
+            // Buscando el número de la cancha en la base de datos.
+            FindIterable<Document> iter = col.find(filtro);
+            for (Document doc : iter) {
+                // Retornando si el número de la cancha existe en la base de datos.
+                return true;
+            }
+        }
+        // Retornando si el número de la cancha no existe en la base de datos.
+        return false;
+    }
+
+    /**
      * Metodo que se encarga de verificar si el usuario selecciono un registro de la tabla.
      * @param table1 Tabla de la cual se selecciona el registro.
      * @return True si el usuario selecciono un registro, false en caso contrario.
