@@ -88,16 +88,9 @@ public class adingrCan extends JFrame {
             canc.setNombre(nom.getText());
             canc.setUbicacion(dir.getText());
 
-            if (numJug.getSelectedIndex() == 0) {
-                // Verificar si se ha seleccionado un número de jugadores
-                ver.setText("Elija el número de jugadores");
-            } else {
-                // Obtener el número de jugadores seleccionado
-                canc.setNumeroJugadores(Objects.requireNonNull(numJug.getSelectedItem()).toString());
-            }
 
             // Verificar si se han ingresado todos los campos
-            if (canc.getNumero().isEmpty() || canc.getNombre().isEmpty() || canc.getUbicacion().isEmpty() || canc.getNumeroJugadores().isEmpty()) {
+            if (canc.getNumero().isEmpty() || canc.getNombre().isEmpty() || canc.getUbicacion().isEmpty() || numJug.getSelectedIndex() == 0) {
                 ver.setText("Ingrese todos los campos");
             } else if (!canc.vernumCan()) {
                 // Verificar si el número de canchas solo contiene 5 dígitos
@@ -108,6 +101,7 @@ public class adingrCan extends JFrame {
             } else if (canc.canExistente()) {
                 ver.setText("Número de cancha ya registrado");
             } else {
+                canc.setNumeroJugadores(Objects.requireNonNull(numJug.getSelectedItem()).toString());
                 // Conexión a la base de datos
                 try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                     MongoDatabase db = mongo.getDatabase("futbolito");
