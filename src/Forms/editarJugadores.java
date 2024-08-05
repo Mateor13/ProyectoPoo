@@ -39,6 +39,7 @@ public class editarJugadores extends JFrame {
     private JLabel ver2;
     private JPasswordField confcla;
     private JLabel ver;
+    private JLabel confi;
     // Se crea una instancia de la clase Usuarios.
     Usuarios usu = new Usuarios();
 
@@ -193,6 +194,7 @@ public class editarJugadores extends JFrame {
                 // Se muestra el campo para ingresar la nueva contraseña.
                 txt.setText("Ingrese la nueva contraseña");
                 con.setVisible(true);
+                confi.setVisible(true);
                 confcla.setVisible(true);
                 break;
         }
@@ -368,6 +370,7 @@ public class editarJugadores extends JFrame {
         elegBtn.setVisible(false);
         txt.setVisible(false);
         ver2.setVisible(false);
+        confi.setVisible(false);
     }
 
     /**
