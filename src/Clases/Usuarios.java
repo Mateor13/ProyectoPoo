@@ -308,6 +308,36 @@ public class Usuarios {
     }
 
     /**
+     * Verifica si el correo electrónico del usuario ya existe en la base de datos.
+     *
+     * @param correo El correo del usuario a verificar.
+     * @return true si el correo ya existe, false de lo contrario.
+     */
+    public boolean corrExistente(String correo){
+            //Crea la conexión con la base de datos
+            try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+                //Se conecta a la base de datos
+                MongoDatabase db = mongo.getDatabase("futbolito");
+                //Se conecta a la colección Usuarios
+                MongoCollection<Document> col = db.getCollection("Usuarios");
+                //Crea un documento con el correo del usuario
+                Document doc = new Document("correo", correo);
+                //Busca el documento en la colección
+                FindIterable<Document> iterable = col.find(doc);
+                //Recorre los documentos de la colección
+                for (Document document : iterable) {
+                    //Obtiene el correo del documento
+                    String cor = document.getString("correo");
+                    //Verifica si el correo ya existe
+                    if (correo.equals(cor)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+    /**
      * Verifica si el texto dado es un correo electrónico válido.
      *
      * @param text El texto a verificar.
@@ -346,6 +376,33 @@ public class Usuarios {
         // Verifica si el teléfono coincide con el patrón
         Matcher tel = patron.matcher(text);
         return tel.matches();
+    }
+
+    /**
+     *
+     */
+    public boolean telExistente(String tel) {
+        //Crea la conexión con la base de datos
+        try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
+            //Se conecta a la base de datos
+            MongoDatabase db = mongo.getDatabase("futbolito");
+            //Se conecta a la colección Usuarios
+            MongoCollection<Document> col = db.getCollection("Usuarios");
+            //Crea un documento con el teléfono del usuario
+            Document doc = new Document("celular", tel);
+            //Busca el documento en la colección
+            FindIterable<Document> iterable = col.find(doc);
+            //Recorre los documentos de la colección
+            for (Document document : iterable) {
+                //Obtiene el teléfono del documento
+                String tele = document.getString("celular");
+                //Verifica si el teléfono ya existe
+                if (tel.equals(tele)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     /**

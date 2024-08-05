@@ -257,6 +257,10 @@ public class editarJugadores extends JFrame {
                 ver2.setText("El email es incorrecto");
                 return false;
             }
+            if (usu.corrExistente(cor.getText())) {
+                ver2.setText("Correo ya registrado");
+                return false;
+            }
         }
 
         //Si el campo teléfono es visible
@@ -269,6 +273,10 @@ public class editarJugadores extends JFrame {
             //Si el teléfono no es válido
             if (!usu.verNume2(tel.getText())) {
                 ver2.setText("El número de teléfono es incorrecto");
+                return false;
+            }
+            if (usu.telExistente(tel.getText())) {
+                ver2.setText("Teléfono ya registrado");
                 return false;
             }
         }

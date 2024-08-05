@@ -85,9 +85,9 @@ public class adingrUsu extends JFrame{
             } else if (fechaSeleccionada.after(new Date())) {
                 ver.setText("La fecha de nacimiento no puede ser mayor a la actual");
                 // Verificar si el email no es válido
-            }else if (us.verCorreo()){
+            }else if (us.verCorreo()) {
                 ver.setText("El email es incorrecto");
-            } else {
+        } else {
                 try (MongoClient moncli = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                     MongoDatabase db = moncli.getDatabase("futbolito");
                     MongoCollection<Document> col = db.getCollection("Usuarios");
@@ -105,12 +105,26 @@ public class adingrUsu extends JFrame{
                     } else {
                         // Recorrer los documentos encontrados
                         for (Document documents : iterable) {
-                            // Obtener la cédula y el email del documento
+                            // Se obtiene la cédula y el correo de los documentos
                             String cedula = documents.getString("cedula");
-                            String email = documents.getString("email");
-                            // Verificar si la cédula o el email ya existen
-                            if (us.getCedula().equals(cedula) || us.getEmail().equals(email)) {
-                                ver.setText("Usuario existente");
+                            String email = documents.getString("correo");
+                            String num = documents.getString("celular");
+                            // Si la cédula o el correo del usuario ya existen, se muestra un mensaje de error
+                            if (us.getEmail().equals(email)) {
+                                ver.setText("Correo ya registrado");
+                                // Se asigna true a la variable para indicar que el usuario ya existe
+                                userExists = true;
+                                break;
+                            }
+                            if (us.getTelefono().equals(num)){
+                                ver.setText("Número de teléfono ya registrado");
+                                // Se asigna true a la variable para indicar que el usuario ya existe
+                                userExists = true;
+                                break;
+                            }
+                            if (us.getCedula().equals(cedula)){
+                                ver.setText("Cédula ya registrada");
+                                // Se asigna true a la variable para indicar que el usuario ya existe
                                 userExists = true;
                                 break;
                             }
