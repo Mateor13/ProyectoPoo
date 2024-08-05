@@ -6,6 +6,8 @@ import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -25,6 +27,7 @@ public class login extends JFrame {
     private JLabel Registro;
     private JPanel log;
     private JLabel ver;
+    private JButton volverAlMenúDeButton;
 
     /**
      * Constructor de la clase login.
@@ -36,7 +39,7 @@ public class login extends JFrame {
         setTitle("Inicio de sesión");
         setContentPane(log);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 450));
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -150,6 +153,13 @@ public class login extends JFrame {
                 super.mouseExited(e);
                 // Cambiar el color del texto a cian
                 Registro.setForeground(Color.cyan);
+            }
+        });
+        volverAlMenúDeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuInicio();
+                dispose();
             }
         });
     }

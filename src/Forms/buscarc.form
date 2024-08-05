@@ -17,8 +17,9 @@
         </constraints>
         <properties>
           <background color="-9064132"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
-          <text value="Ver Reservas"/>
+          <text value="Ver Reservas realizadas"/>
         </properties>
       </component>
       <vspacer id="659d5">
@@ -42,8 +43,9 @@
         </constraints>
         <properties>
           <background color="-1744027"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
-          <text value="Regresar"/>
+          <text value="Regresar a Menú de Dueño"/>
         </properties>
       </component>
       <vspacer id="2d6ab">

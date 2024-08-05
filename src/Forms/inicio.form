@@ -29,7 +29,7 @@
           <background color="-13654570"/>
           <focusable value="false"/>
           <foreground color="-1"/>
-          <text value="Ver Horarios"/>
+          <text value="Elegir fecha de reserva"/>
         </properties>
       </component>
       <component id="2f2b0" class="javax.swing.JButton" binding="cerrBtn">

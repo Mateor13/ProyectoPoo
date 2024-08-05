@@ -123,6 +123,9 @@ public class adingrCan extends JFrame {
                     // Label confirmando el registro exitoso
                     ver.setForeground(Color.GREEN);
                     ver.setText("Cancha registrada con éxito");
+                    setPreferredSize(new Dimension(600, 550));
+                    pack();
+                    setLocationRelativeTo(null);
                 } catch (Exception e) {
                     ver.setForeground(Color.RED);
                     ver.setText("Error al registrar cancha: " + e.getMessage());

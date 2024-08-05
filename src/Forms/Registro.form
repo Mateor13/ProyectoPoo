@@ -178,7 +178,7 @@
           <focusable value="false"/>
           <font size="20"/>
           <foreground color="-1"/>
-          <text value="Cancelar"/>
+          <text value="Cancelar y regresar al Login"/>
         </properties>
       </component>
       <component id="80393" class="javax.swing.JButton" binding="registrarButton" default-binding="true">

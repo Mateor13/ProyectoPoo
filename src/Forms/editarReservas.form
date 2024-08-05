@@ -115,7 +115,7 @@
         <properties>
           <background color="-9064132"/>
           <foreground color="-1"/>
-          <text value="Elegir de nuevo"/>
+          <text value="Elegir otro campo"/>
         </properties>
       </component>
       <component id="e195d" class="javax.swing.JButton" binding="regBtn">
@@ -125,7 +125,7 @@
         <properties>
           <background color="-1744027"/>
           <foreground color="-1"/>
-          <text value="Regresar"/>
+          <text value="Regresar a Gestión de Reservas"/>
         </properties>
       </component>
       <hspacer id="c9b61">

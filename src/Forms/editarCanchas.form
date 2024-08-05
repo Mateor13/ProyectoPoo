@@ -157,7 +157,7 @@
         <properties>
           <background color="-1744027"/>
           <foreground color="-1"/>
-          <text value="Regresar"/>
+          <text value="Regresar a Gestión de Canchas"/>
         </properties>
       </component>
       <component id="e5fc6" class="javax.swing.JLabel" binding="ver2">
@@ -176,7 +176,7 @@
         <properties>
           <background color="-9064132"/>
           <foreground color="-1"/>
-          <text value="Elegir de nuevo"/>
+          <text value="Elegir otro campo"/>
         </properties>
       </component>
     </children>

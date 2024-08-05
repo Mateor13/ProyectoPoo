@@ -24,6 +24,7 @@
         </constraints>
         <properties>
           <background color="-65536"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
           <text value="Cancelar"/>
         </properties>
@@ -34,6 +35,7 @@
         </constraints>
         <properties>
           <background color="-9847178"/>
+          <focusable value="false"/>
           <foreground color="-1"/>
           <text value="Aceptar"/>
         </properties>

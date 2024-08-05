@@ -51,7 +51,7 @@
           <focusable value="false"/>
           <font size="20"/>
           <foreground color="-1"/>
-          <text value="Ingresar"/>
+          <text value="Ingresar a la aplicación"/>
         </properties>
       </component>
       <component id="94a23" class="javax.swing.JButton" binding="cerrarBtn">
