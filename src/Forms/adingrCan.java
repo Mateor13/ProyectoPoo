@@ -88,7 +88,7 @@ public class adingrCan extends JFrame {
             canc.setNombre(nom.getText());
             canc.setUbicacion(dir.getText());
 
-
+            ver.setForeground(Color.RED);
             // Verificar si se han ingresado todos los campos
             if (canc.getNumero().isEmpty() || canc.getNombre().isEmpty() || canc.getUbicacion().isEmpty() || numJug.getSelectedIndex() == 0) {
                 ver.setText("Ingrese todos los campos");
@@ -120,9 +120,11 @@ public class adingrCan extends JFrame {
 
                     // Insertar el documento en la colección
                     col.insertOne(canchaDoc);
-
+                    // Label confirmando el registro exitoso
+                    ver.setForeground(Color.GREEN);
                     ver.setText("Cancha registrada con éxito");
                 } catch (Exception e) {
+                    ver.setForeground(Color.RED);
                     ver.setText("Error al registrar cancha: " + e.getMessage());
                 }
             }
