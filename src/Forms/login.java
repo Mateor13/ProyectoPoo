@@ -6,8 +6,6 @@ import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -27,7 +25,7 @@ public class login extends JFrame {
     private JLabel Registro;
     private JPanel log;
     private JLabel ver;
-    private JButton volverAlMenúDeButton;
+    private JButton volverBtn;
 
     /**
      * Constructor de la clase login.
@@ -155,12 +153,10 @@ public class login extends JFrame {
                 Registro.setForeground(Color.cyan);
             }
         });
-        volverAlMenúDeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+
+        volverBtn.addActionListener(_ -> {
                 new MenuInicio();
                 dispose();
-            }
         });
     }
 }
