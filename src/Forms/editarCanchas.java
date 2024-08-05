@@ -167,7 +167,7 @@ public class editarCanchas extends JFrame {
             }
         }
 
-        if (numJBtn.isVisible()){
+        if (numJug.isVisible()){
             if (numJug.getSelectedIndex() == 0){
                 ver2.setText("Elija el número de jugadores");
                 return false;
@@ -185,7 +185,7 @@ public class editarCanchas extends JFrame {
         switch (canc.getBtn()) {
             case "nombre":
                 canc.setInput(nomb.getText());
-                ver.setText("editando la cancha: " + canc.getInput());
+                ver.setText("Editando la cancha: " + canc.getInput());
                 break;
             case "direccion":
                 canc.setInput(dire.getText());
