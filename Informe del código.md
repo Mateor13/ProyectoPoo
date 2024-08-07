@@ -6,7 +6,7 @@
 
 El proyecto retrata un sistema de generación, gestión y manejo de reservas para una organización que se encarga de la reservas de canchas sintétitcas
 
-# Liniamientos propuestos para este proyecto
+# Lineamientos propuestos para este proyecto
 ## Usuarios 
 Se determinaron 3 usuarios:
 ### Administrador: 
