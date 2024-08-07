@@ -112,8 +112,8 @@ Se determina un método booleano que verifica que el administrador haya seleccio
 
 4. #### Mostrar los datos de la Base de Datos en la tabla de gestión de Canchas
 Se muestran los datos en una tabla ya establecida para los Usuarios clientes.
-![image](https://github.com/user-attachments/assets/9905eebe-5fcd-4bf9-821c-693daf45348f)
-![image](https://github.com/user-attachments/assets/2b9a3b24-5c2b-43ef-9d0b-52917268ead9)
+![image](https://github.com/user-attachments/assets/d0eac0d5-bbf8-4b55-83e9-2b584d74b32b)
+![image](https://github.com/user-attachments/assets/284a2ec0-9d91-4790-aaa7-36e1f75fd3e4)
 
 5. #### Mostrar los datos de la Base de Datos en la tabla de gestión de Canchas
 Se muestran los datos en una tabla ya establecida para los Usuarios administrador.
@@ -246,9 +246,9 @@ Es un form similar al Registro.
 
 12. ### AdIngrCan
 En este form se agregaran los atributos de las cancha como lo son el nombre, dirección, número de cancha, número de jugadores y una imagen. Todos los campos deben ser llenados y cumplir con ciertos requisitos.
-![image](https://github.com/user-attachments/assets/2b9b8782-3737-4f20-b61c-efeae0508274)
-![image](https://github.com/user-attachments/assets/f8fe786c-4f00-4d3e-9def-e08d332c479a)
-![image](https://github.com/user-attachments/assets/3f1fbc80-3102-4c90-a666-8aab5884f0c3)
+![image](https://github.com/user-attachments/assets/0aa24202-12a9-44ee-a234-e8b9ab298871)
+![image](https://github.com/user-attachments/assets/3ace5cbb-7112-46e9-bb02-f56d44e3ae50)
+![image](https://github.com/user-attachments/assets/c4375fca-805f-45cb-83a4-1b412a41c3db)
 
 13. ### ElimCancha, ElimUsuario y ElimReservas
 En este form se asegura de que en realidad se va a borrar el atributo seleccionado. Con dos botones de "Aceptar" y "Cancelar". Con un texto determinado por si es cancha, jugador o reserva.
