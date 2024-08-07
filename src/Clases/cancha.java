@@ -170,7 +170,7 @@ public class cancha {
             Document filtro = new Document("id", getNumero());
             // Buscando el número de la cancha en la base de datos.
             FindIterable<Document> iter = col.find(filtro);
-            for (Document doc : iter) {
+            for (Document _ : iter) {
                 // Retornando si el número de la cancha existe en la base de datos.
                 return true;
             }
@@ -233,7 +233,7 @@ public class cancha {
                 model.addRow(new Object[]{numCancha, nom, dir, numJug, icon});
             }
         } catch (Exception ex) {
-            ex.printStackTrace(); // Imprimir la traza de la excepción para depuración
+            // Imprimir la traza de la excepción para depuración
         }
 
         // Establecer el renderizador de celdas personalizado para la columna de imagen
