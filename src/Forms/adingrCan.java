@@ -51,7 +51,6 @@ public class adingrCan extends JFrame {
 
         // Crear objeto de la clase cancha
         cancha canc = new cancha();
-
         // Acción para el botón "Elegir Imagen"
         elegBtn.addActionListener(_ -> {
             // Crear un selector de archivos
@@ -67,7 +66,6 @@ public class adingrCan extends JFrame {
                 try (FileInputStream foto = new FileInputStream(selectedFile)) {
                     // Leer la imagen como un array de bytes
                     imageBytes = foto.readAllBytes();
-
                     // Mostrar la imagen en el JLabel con tamaño 100x100
                     ImageIcon imageIcon = new ImageIcon(imageBytes);
                     Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -80,7 +78,6 @@ public class adingrCan extends JFrame {
                 }
             }
         });
-
         // Acción para el botón "Registrar"
         registrarBtn.addActionListener(_ -> {
             // Obtener los datos ingresados por el usuario

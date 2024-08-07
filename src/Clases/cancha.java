@@ -2,12 +2,14 @@ package Clases;
 
 import com.mongodb.client.*;
 import org.bson.Document;
-import org.bson.types.Binary;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -192,7 +194,6 @@ public class cancha {
      *
      * @param tabla Tabla en la cual se muestran las canchas.
      */
-    // Método para mostrar las canchas en una tabla
     public void mostrarCanchas(JTable tabla) {
         // Creando un modelo de tabla.
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
@@ -222,28 +223,14 @@ public class cancha {
                 String nom = doc.getString("nombre");
                 String dir = doc.getString("direccion");
                 String numJug = doc.getString("numJugadores");
-
-                // Convertir la imagen Base64 a bytes
-                byte[] imageBytes = null;
-
-                // Verificar si el campo "imagen" existe y no es nulo
-                if (doc.containsKey("imagen") && doc.get("imagen") != null) {
                     // Obtener la cadena Base64 de la imagen y convertirla a bytes
                     String base64Image = doc.getString("imagen");
-                    imageBytes = Base64.getDecoder().decode(base64Image);
-                }
-
-                // Convertir los bytes de la imagen a ImageIcon si la imagen no es nula
-                ImageIcon imageIcon = null;
-                if (imageBytes != null) {
-                    // Mostrar la imagen en el JLabel con tamaño 100x100
-                    imageIcon = new ImageIcon(imageBytes);
-                    Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                    imageIcon = new ImageIcon(image);
-                }
-
+                    byte[] ImagenData = Base64.getDecoder().decode(base64Image);
+                    ByteArrayInputStream bais = new ByteArrayInputStream(ImagenData);
+                    BufferedImage ImagenCan = ImageIO.read(bais);
+                    ImageIcon icon = new ImageIcon(ImagenCan.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
                 // Agregando los datos a la tabla.
-                model.addRow(new Object[]{numCancha, nom, dir, numJug, imageIcon});
+                model.addRow(new Object[]{numCancha, nom, dir, numJug, icon});
             }
         } catch (Exception ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción para depuración
