@@ -27,6 +27,53 @@ Se estableció una conexión óptima con MongoDB para asegurar el manejo correct
 
 # Presentación del Codigo y de las diferentes interfaces
 1. ## Clases
-Para el instanciamiento de los diferentes objetos que participan en este sistema, se crearon 4 para mejorar la recopilación y manejo de datos, brindados del usuario o llamados de la base de datos.
+Para el instanciamiento de los diferentes objetos que participan en este sistema, se crearon 4 clases para mejorar la recopilación y manejo de datos, brindados del usuario o llamados de la base de datos.
+
+- ### Usuarios:
+En la clase Usuario se crearon los atributos: nombre, apellido, email, telefono, clave, cedula, confirmación de clave, clave encriptada, valor a cambiar, Campo a cambiar, día de Nacimiento, mes de Nacimiento, año de Nacimiento.
+
+![image](https://github.com/user-attachments/assets/710f2ba4-9c44-48e7-ae21-788ed3bf9e2f)
+Se determinaron sus contructores
+
+![image](https://github.com/user-attachments/assets/b662680b-eebf-48e9-9f06-2c36c5cb0fc9)
+Getters y Setters
+
+![image](https://github.com/user-attachments/assets/b829bfb4-2bb8-4361-8c2c-8bf03d8787b5)
+
+#### Métodos personalizados
+1. ##### Verificación de Correo:
+Método booleano que verifica que el correo ingresado por el Usuario al registrarse, cumpla con el formato correcto.
+![image](https://github.com/user-attachments/assets/40b4b3de-9cbb-4473-a500-590681e438ec)
+
+2. ##### Verificación de un correo ya existente:
+Método booleano que se encarga de verificar que el correo ingresado por el usuario al registrarse, no se encuentre registrado.
+![image](https://github.com/user-attachments/assets/cf2fa8bd-8e9b-45af-a850-116c4acfbb1e)
+
+3. ##### Verificación de Correo con parámetro:
+Método booleano que verifica que el correo ingresado por el Administrador al editar usuario, cumpla con el formato correcto.
+![image](https://github.com/user-attachments/assets/702b97e1-211a-47b6-8b68-035b584438e3)
+
+4. ##### Verificación de patrón de número de teléfono
+Métodos con y sin parametros, para la edición y registro de un usuario respectivamente. 
+![image](https://github.com/user-attachments/assets/cb540cfe-f18b-4544-a51e-f230062a108a)
+
+5. ##### Verificación de un teléfono ya existente:
+Método booleano que se encarga de verificar que el teléfono ingresado por el usuario al registrarse, no se encuentre registrado.
+![image](https://github.com/user-attachments/assets/3f85ef84-f785-4aa7-a2b4-4d84785107ec)
+
+6. ##### Verificación de Cédula:
+Método booleano que verifica que la cédula ingresada por el Usuario al registrarse, cumpla con el formato correcto.
+![image](https://github.com/user-attachments/assets/15d08d67-b1a1-4b9a-b599-3db1f1284b2b)
+
+7. ##### Encriptación de la contraseña ingresada:
+Métodos para encriptar las contraseñas ingresadas por el usuario al registrarse y al editar sus datos.
+![image](https://github.com/user-attachments/assets/18adb7be-4867-498c-b792-78d2736e751d)
+
+
+
+
+8. 
+
+-
 
 2. ## Forms
