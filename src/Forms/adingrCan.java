@@ -1,14 +1,15 @@
 package Forms;
+
 import Clases.cancha;
 import com.mongodb.client.*;
 import org.bson.Document;
-import org.bson.types.Binary;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class adingrCan extends JFrame {
     private JTextField num;
     private JTextField nom;
     private JTextField dir;
-    private JComboBox numJug;
+    private JComboBox<String> numJug;
     private JButton registrarBtn;
     private JButton regresarBtn;
     private JPanel regCan;
@@ -60,7 +61,6 @@ public class adingrCan extends JFrame {
             // Configurar el filtro de archivos para imágenes
             fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagen", "jpg", "jpeg", "png"));
             // Mostrar el selector de archivos y esperar a que el usuario seleccione un archivo
-            fileChooser.accept(fileChooser.getSelectedFile());
             int result = fileChooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
@@ -81,7 +81,7 @@ public class adingrCan extends JFrame {
             }
         });
 
-// Acción para el botón "Registrar"
+        // Acción para el botón "Registrar"
         registrarBtn.addActionListener(_ -> {
             // Obtener los datos ingresados por el usuario
             canc.setNumero(num.getText());
@@ -95,7 +95,7 @@ public class adingrCan extends JFrame {
             } else if (!canc.vernumCan()) {
                 // Verificar si el número de canchas solo contiene 5 dígitos
                 ver.setText("El número de canchas solo puede contener 5 dígitos");
-            }else if (imageBytes == null) {
+            } else if (imageBytes == null) {
                 // Verificar si se ha subido una imagen
                 ver.setText("Suba una imagen de la cancha");
             } else if (canc.canExistente()) {
@@ -107,16 +107,15 @@ public class adingrCan extends JFrame {
                     MongoDatabase db = mongo.getDatabase("futbolito");
                     MongoCollection<Document> col = db.getCollection("Canchas");
 
+                    // Convertir la imagen a Base64
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
                     // Crear documento con los datos de la cancha
                     Document canchaDoc = new Document("id", canc.getNumero())
                             .append("nombre", canc.getNombre())
                             .append("direccion", canc.getUbicacion())
-                            .append("numJugadores", canc.getNumeroJugadores());
-
-                    // Agregar la imagen si está disponible
-                    if (imageBytes != null) {
-                        canchaDoc.append("imagen", new Binary(imageBytes));
-                    }
+                            .append("numJugadores", canc.getNumeroJugadores())
+                            .append("imagen", base64Image); // Almacenar imagen en Base64
 
                     // Insertar el documento en la colección
                     col.insertOne(canchaDoc);

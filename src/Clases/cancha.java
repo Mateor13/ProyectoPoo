@@ -6,7 +6,9 @@ import org.bson.types.Binary;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -190,6 +192,7 @@ public class cancha {
      *
      * @param tabla Tabla en la cual se muestran las canchas.
      */
+    // Método para mostrar las canchas en una tabla
     public void mostrarCanchas(JTable tabla) {
         // Creando un modelo de tabla.
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
@@ -219,13 +222,15 @@ public class cancha {
                 String nom = doc.getString("nombre");
                 String dir = doc.getString("direccion");
                 String numJug = doc.getString("numJugadores");
-                // Convertir la imagen a bytes
+
+                // Convertir la imagen Base64 a bytes
                 byte[] imageBytes = null;
 
                 // Verificar si el campo "imagen" existe y no es nulo
                 if (doc.containsKey("imagen") && doc.get("imagen") != null) {
-                    // Obtener los bytes de la imagen
-                    imageBytes = doc.get("imagen", Binary.class).getData();
+                    // Obtener la cadena Base64 de la imagen y convertirla a bytes
+                    String base64Image = doc.getString("imagen");
+                    imageBytes = Base64.getDecoder().decode(base64Image);
                 }
 
                 // Convertir los bytes de la imagen a ImageIcon si la imagen no es nula
@@ -245,7 +250,17 @@ public class cancha {
         }
 
         // Establecer el renderizador de celdas personalizado para la columna de imagen
-        tabla.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
+        tabla.getColumnModel().getColumn(4).setCellRenderer(new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                label.setOpaque(true);
+                if (value instanceof ImageIcon) {
+                    label.setIcon((ImageIcon) value);
+                }
+                return label;
+            }
+        });
     }
 
     /**
