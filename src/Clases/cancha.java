@@ -235,19 +235,20 @@ public class cancha {
                 String nom = doc.getString("nombre");
                 String dir = doc.getString("direccion");
                 String numJug = doc.getString("numJugadores");
-
-                // Obtener la cadena Base64 de la imagen y convertirla a bytes
+                // Obtener la cadena Base64 de la imagen y convertirla a bytes.
                 String base64Image = doc.getString("imagen");
                 byte[] ImagenData = Base64.getDecoder().decode(base64Image);
+                // Convertir bytes a BufferedImage.
                 ByteArrayInputStream bais = new ByteArrayInputStream(ImagenData);
                 BufferedImage ImagenCan = ImageIO.read(bais);
-                ImageIcon icon = new ImageIcon(ImagenCan.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-
+                // Redimensionar la imagen.
+                Image scaledImage = ImagenCan.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(scaledImage);
                 // Agregando los datos a la tabla.
                 model.addRow(new Object[]{numCancha, nom, dir, numJug, icon});
             }
         } catch (Exception ex) {
-            ex.printStackTrace(); // Imprimir la traza de la excepción para depuración
+            ex.printStackTrace(); // Imprimir la traza de la excepción para depuración.
         }
     }
 
