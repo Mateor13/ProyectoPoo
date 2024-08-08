@@ -48,7 +48,6 @@ public class adingrCan extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         img.setVisible(false);
-
         // Crear objeto de la clase cancha
         cancha canc = new cancha();
         // Acción para el botón "Elegir Imagen"
