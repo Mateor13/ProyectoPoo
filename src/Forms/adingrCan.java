@@ -30,7 +30,7 @@ public class adingrCan extends JFrame {
     private JLabel img;
     private JButton elegBtn;
     // Variable global para almacenar los bytes de la imagen
-    private byte[] imageBytes;
+    private byte[] imageBytes = null;
 
     /**
      * Constructor de la clase adingrCan.
@@ -78,7 +78,7 @@ public class adingrCan extends JFrame {
                 }
             }
         });
-        // Acción para el botón "Registrar"
+
         registrarBtn.addActionListener(_ -> {
             // Obtener los datos ingresados por el usuario
             canc.setNumero(num.getText());
@@ -103,17 +103,14 @@ public class adingrCan extends JFrame {
                 try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
                     MongoDatabase db = mongo.getDatabase("futbolito");
                     MongoCollection<Document> col = db.getCollection("Canchas");
-
                     // Convertir la imagen a Base64
                     String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
                     // Crear documento con los datos de la cancha
                     Document canchaDoc = new Document("id", canc.getNumero())
                             .append("nombre", canc.getNombre())
                             .append("direccion", canc.getUbicacion())
                             .append("numJugadores", canc.getNumeroJugadores())
                             .append("imagen", base64Image); // Almacenar imagen en Base64
-
                     // Insertar el documento en la colección
                     col.insertOne(canchaDoc);
                     // Label confirmando el registro exitoso
@@ -128,7 +125,6 @@ public class adingrCan extends JFrame {
                 }
             }
         });
-
 
         // Acción para el botón "Regresar"
         regresarBtn.addActionListener(_ -> {

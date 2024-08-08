@@ -196,10 +196,9 @@ public class cancha {
      */
     public void mostrarCanchas(JTable tabla) {
         // Creando un modelo de tabla.
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             // Sobreescribiendo el método getColumnClass para establecer el tipo de dato de la columna de la imagen.
             @Override
-            // Estableciendo el tipo de dato de la columna de la imagen.
             public Class<?> getColumnClass(int column) {
                 // Verificando si la columna es la columna de la imagen.
                 if (column == 4) {
@@ -210,6 +209,10 @@ public class cancha {
                 return Object.class;
             }
         };
+        // Estableciendo los encabezados de la tabla.
+        model.setColumnIdentifiers(new Object[]{"Número Cancha", "Nombre", "Dirección", "Número jugadores", "Imagen"});
+        // Asignando el modelo a la tabla.
+        tabla.setModel(model);
         // Estableciendo el tamaño de las filas de la tabla.
         tabla.setRowHeight(100); // Ajustar el tamaño de la fila para la imagen
         // Estableciendo el color de fondo y de la fuente de la tabla.
@@ -218,13 +221,7 @@ public class cancha {
         // Estableciendo el color de fondo y de la fuente de los encabezados de la tabla.
         tabla.getTableHeader().setBackground(new java.awt.Color(35, 35, 35));
         tabla.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
-        // Limpiando la tabla.
-        model.setRowCount(0);
-        // Estableciendo los encabezados de la tabla.
-        model.setColumnIdentifiers(new Object[]{"Número Cancha", "Nombre", "Dirección", "Número jugadores", "Imagen"});
-        // Asignando el modelo a la tabla.
-        tabla.setModel(model);
-        // Conectando a la base de datos de mongoDB.
+        // Conectando a la base de datos de MongoDB.
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             // Seleccionando la base de datos y la colección.
             MongoDatabase db = mongo.getDatabase("futbolito");
@@ -238,28 +235,20 @@ public class cancha {
                 String nom = doc.getString("nombre");
                 String dir = doc.getString("direccion");
                 String numJug = doc.getString("numJugadores");
-                    // Obtener la cadena Base64 de la imagen y convertirla a bytes
-                    String base64Image = doc.getString("imagen");
-                    byte[] ImagenData = Base64.getDecoder().decode(base64Image);
-                    ByteArrayInputStream bais = new ByteArrayInputStream(ImagenData);
-                    BufferedImage ImagenCan = ImageIO.read(bais);
-                    ImageIcon icon = new ImageIcon(ImagenCan.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+
+                // Obtener la cadena Base64 de la imagen y convertirla a bytes
+                String base64Image = doc.getString("imagen");
+                byte[] ImagenData = Base64.getDecoder().decode(base64Image);
+                ByteArrayInputStream bais = new ByteArrayInputStream(ImagenData);
+                BufferedImage ImagenCan = ImageIO.read(bais);
+                ImageIcon icon = new ImageIcon(ImagenCan.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+
                 // Agregando los datos a la tabla.
                 model.addRow(new Object[]{numCancha, nom, dir, numJug, icon});
             }
         } catch (Exception ex) {
-            // Imprimir la traza de la excepción para depuración
+            ex.printStackTrace(); // Imprimir la traza de la excepción para depuración
         }
-
-        // Establecer el renderizador de celdas personalizado para la columna de imagen
-        tabla.getColumnModel().getColumn(4).setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
-            JLabel label = new JLabel();
-            label.setOpaque(true);
-            if (value instanceof ImageIcon) {
-                label.setIcon((ImageIcon) value);
-            }
-            return label;
-        });
     }
 
     /**
