@@ -196,7 +196,20 @@ public class cancha {
      */
     public void mostrarCanchas(JTable tabla) {
         // Creando un modelo de tabla.
-        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            // Sobreescribiendo el método getColumnClass para establecer el tipo de dato de la columna de la imagen.
+            @Override
+            // Estableciendo el tipo de dato de la columna de la imagen.
+            public Class<?> getColumnClass(int column) {
+                // Verificando si la columna es la columna de la imagen.
+                if (column == 4) {
+                    // Retornando el tipo de dato de la columna de la imagen.
+                    return ImageIcon.class;
+                }
+                // Retornando el tipo de dato de la columna.
+                return Object.class;
+            }
+        };
         // Estableciendo el tamaño de las filas de la tabla.
         tabla.setRowHeight(100); // Ajustar el tamaño de la fila para la imagen
         // Estableciendo el color de fondo y de la fuente de la tabla.
@@ -209,6 +222,8 @@ public class cancha {
         model.setRowCount(0);
         // Estableciendo los encabezados de la tabla.
         model.setColumnIdentifiers(new Object[]{"Número Cancha", "Nombre", "Dirección", "Número jugadores", "Imagen"});
+        // Asignando el modelo a la tabla.
+        tabla.setModel(model);
         // Conectando a la base de datos de mongoDB.
         try (MongoClient mongo = MongoClients.create("mongodb+srv://mateo1309:Hola123456@analisis.qthwhia.mongodb.net/")) {
             // Seleccionando la base de datos y la colección.
@@ -237,16 +252,13 @@ public class cancha {
         }
 
         // Establecer el renderizador de celdas personalizado para la columna de imagen
-        tabla.getColumnModel().getColumn(4).setCellRenderer(new TableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel label = new JLabel();
-                label.setOpaque(true);
-                if (value instanceof ImageIcon) {
-                    label.setIcon((ImageIcon) value);
-                }
-                return label;
+        tabla.getColumnModel().getColumn(4).setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+            JLabel label = new JLabel();
+            label.setOpaque(true);
+            if (value instanceof ImageIcon) {
+                label.setIcon((ImageIcon) value);
             }
+            return label;
         });
     }
 
